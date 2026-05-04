@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: ${SEO_SITE_URL}/sitemap.xml

@@ -1,0 +1,93 @@
+<svg width="900" height="1600" viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgReg" x1="100" y1="70" x2="800" y2="1510" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F1FFF6"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="heroReg" x1="190" y1="175" x2="695" y2="410" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14532D"/>
+      <stop offset="1" stop-color="#16A34A"/>
+    </linearGradient>
+    <filter id="shadowReg" x="80" y="90" width="740" height="1430" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#0F172A" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="1600" rx="48" fill="url(#bgReg)"/>
+  <circle cx="150" cy="250" r="130" fill="#DCFCE7"/>
+  <circle cx="730" cy="1250" r="160" fill="#E5F7EA"/>
+
+  <text x="450" y="92" text-anchor="middle" fill="#14532D" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">Concept 2 · Registro de CQ</text>
+  <text x="450" y="128" text-anchor="middle" fill="#4B5563" font-family="Inter, Arial, sans-serif" font-size="20">Fluxo de lancamento pensado para uso rapido no celular</text>
+
+  <g filter="url(#shadowReg)">
+    <rect x="150" y="150" width="600" height="1320" rx="58" fill="#0F172A"/>
+    <rect x="175" y="175" width="550" height="1270" rx="44" fill="#F8FBF9"/>
+    <rect x="350" y="192" width="200" height="26" rx="13" fill="#0B1220"/>
+  </g>
+
+  <rect x="175" y="175" width="550" height="220" rx="44" fill="url(#heroReg)"/>
+  <text x="220" y="246" fill="#D1FAE5" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">NOVO REGISTRO</text>
+  <text x="220" y="302" fill="white" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="700">Registrar CQ</text>
+  <text x="220" y="340" fill="#DCFCE7" font-family="Inter, Arial, sans-serif" font-size="21">Menos toques, menos rolagem e feedback claro</text>
+
+  <rect x="220" y="372" width="154" height="44" rx="22" fill="rgba(255,255,255,0.18)"/>
+  <text x="297" y="400" text-anchor="middle" fill="white" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Bioquimica</text>
+
+  <rect x="390" y="372" width="126" height="44" rx="22" fill="rgba(255,255,255,0.18)"/>
+  <text x="453" y="400" text-anchor="middle" fill="white" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Nivel 1</text>
+
+  <rect x="532" y="372" width="120" height="44" rx="22" fill="rgba(255,255,255,0.18)"/>
+  <text x="592" y="400" text-anchor="middle" fill="white" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Turno A</text>
+
+  <rect x="210" y="430" width="480" height="130" rx="30" fill="white"/>
+  <text x="240" y="476" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Exame</text>
+  <rect x="240" y="495" width="420" height="42" rx="21" fill="#F3F4F6"/>
+  <text x="266" y="522" fill="#166534" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Glicose</text>
+  <text x="627" y="522" text-anchor="end" fill="#6B7280" font-family="Inter, Arial, sans-serif" font-size="18">Selecionado</text>
+
+  <rect x="210" y="580" width="230" height="112" rx="28" fill="white"/>
+  <text x="240" y="624" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Lote</text>
+  <text x="240" y="670" fill="#166534" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">LOT-042</text>
+
+  <rect x="460" y="580" width="230" height="112" rx="28" fill="white"/>
+  <text x="490" y="624" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Valor medido</text>
+  <text x="490" y="670" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">108 mg/dL</text>
+
+  <rect x="210" y="712" width="480" height="144" rx="30" fill="white"/>
+  <text x="240" y="758" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Referencia ativa</text>
+  <text x="240" y="798" fill="#166534" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">Alvo 102 · DP 3.5 · CV max 10%</text>
+  <rect x="240" y="818" width="136" height="32" rx="16" fill="#ECFDF3"/>
+  <text x="308" y="839" text-anchor="middle" fill="#15803D" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">Ref valida</text>
+
+  <rect x="210" y="880" width="480" height="190" rx="34" fill="#FFF7ED"/>
+  <text x="240" y="928" fill="#9A3412" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">ANALISE IMEDIATA</text>
+  <text x="240" y="974" fill="#7C2D12" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">Regra 1-2s acionada</text>
+  <text x="240" y="1010" fill="#9A3412" font-family="Inter, Arial, sans-serif" font-size="20">Alerta preventivo. Registrar e repetir controle.</text>
+  <rect x="240" y="1032" width="182" height="40" rx="20" fill="#FDBA74"/>
+  <text x="331" y="1058" text-anchor="middle" fill="#7C2D12" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Repetir controle</text>
+  <rect x="438" y="1032" width="196" height="40" rx="20" fill="#FFEDD5"/>
+  <text x="536" y="1058" text-anchor="middle" fill="#9A3412" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Abrir historico</text>
+
+  <rect x="210" y="1096" width="480" height="138" rx="30" fill="white"/>
+  <text x="240" y="1140" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Checklist de seguranca</text>
+  <circle cx="252" cy="1176" r="10" fill="#16A34A"/>
+  <text x="274" y="1182" fill="#374151" font-family="Inter, Arial, sans-serif" font-size="18">Referencia encontrada para a data selecionada</text>
+  <circle cx="252" cy="1212" r="10" fill="#16A34A"/>
+  <text x="274" y="1218" fill="#374151" font-family="Inter, Arial, sans-serif" font-size="18">Lote e analista preenchidos antes de salvar</text>
+
+  <rect x="210" y="1258" width="480" height="74" rx="37" fill="#166534"/>
+  <text x="450" y="1305" text-anchor="middle" fill="white" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Salvar registro com analise</text>
+
+  <rect x="210" y="1348" width="480" height="58" rx="29" fill="#E5E7EB"/>
+  <text x="450" y="1385" text-anchor="middle" fill="#374151" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="600">Historico do dia · ultimos 5 lancamentos</text>
+
+  <rect x="230" y="1360" width="120" height="36" rx="18" fill="#DCFCE7"/>
+  <text x="290" y="1383" text-anchor="middle" fill="#166534" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">3 OK</text>
+
+  <rect x="365" y="1360" width="120" height="36" rx="18" fill="#FEF3C7"/>
+  <text x="425" y="1383" text-anchor="middle" fill="#B45309" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">1 alerta</text>
+
+  <rect x="500" y="1360" width="170" height="36" rx="18" fill="#FEE2E2"/>
+  <text x="585" y="1383" text-anchor="middle" fill="#B91C1C" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">0 reprovados</text>
+</svg>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- ============================================================
+         Profile: local (default) - Human-readable colored console
+         ============================================================ -->
+    <springProfile name="local | default">
+        <!--
+          Appender local humano-legivel. Inclui correlationId do MDC entre
+          colchetes quando presente (cai para "-" quando nao houver).
+          Fonte: preenchido por CorrelationIdFilter em cada request HTTP.
+        -->
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} %-5level [%X{correlationId:-}] %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+
+        <!-- Debug logging for project packages in local dev -->
+        <logger name="com.bioqc" level="DEBUG"/>
+
+        <!-- Keep Hibernate quiet even in local unless explicitly needed -->
+        <logger name="org.hibernate.SQL" level="DEBUG"/>
+        <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    </springProfile>
+
+    <!-- ============================================================
+         Profile: prod - Structured JSON for Railway / cloud ingestion
+         ============================================================ -->
+    <springProfile name="prod">
+        <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <includeMdcKeyName>correlationId</includeMdcKeyName>
+                <fieldNames>
+                    <timestamp>timestamp</timestamp>
+                    <version>[ignore]</version>
+                    <levelValue>[ignore]</levelValue>
+                </fieldNames>
+                <timeZone>UTC</timeZone>
+                <shortenedLoggerNameLength>36</shortenedLoggerNameLength>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="JSON_CONSOLE"/>
+        </root>
+
+        <!-- Debug logging for project packages -->
+        <logger name="com.bioqc" level="DEBUG"/>
+
+        <!-- Suppress noisy Hibernate output in production -->
+        <logger name="org.hibernate" level="WARN"/>
+        <logger name="org.hibernate.SQL" level="WARN"/>
+        <logger name="org.hibernate.type" level="WARN"/>
+        <logger name="org.hibernate.engine" level="WARN"/>
+        <logger name="org.hibernate.stat" level="WARN"/>
+
+        <!-- Suppress noisy Spring internals -->
+        <logger name="org.springframework.web.servlet.mvc.method.annotation" level="WARN"/>
+        <logger name="org.springframework.security" level="INFO"/>
+    </springProfile>
+
+</configuration>

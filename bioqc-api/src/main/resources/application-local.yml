@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:bioqc;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;NON_KEYWORDS=VALUE,MONTH,YEAR
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+
+jwt:
+  secret: localdevsecretthatislongenoughforjwtandtestingpurposes
+  issuer: bioqc-api-local
+
+cors:
+  allowed-origins: http://localhost:5173
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+reports:
+  v2:
+    enabled: ${REPORTS_V2_ENABLED:true}
+    storage:
+      dir: ${REPORTS_V2_STORAGE_DIR:${java.io.tmpdir}/bioqc-reports-v2}
+    public-base-url: ${REPORTS_V2_PUBLIC_BASE_URL:http://localhost:5173}
+
+app:
+  frontend-url: http://localhost:5173
+  auth:
+    refresh-cookie:
+      secure: false
+      same-site: Lax
+    login-rate-limit:
+      max-attempts: 20
+      window-seconds: 60
+  password-reset:
+    expose-link-in-response: true

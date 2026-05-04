@@ -1,0 +1,87 @@
+spring:
+  application:
+    name: bioqc-api
+  flyway:
+    enabled: ${FLYWAY_ENABLED:true}
+    baseline-on-migrate: ${FLYWAY_BASELINE_ON_MIGRATE:false}
+    baseline-version: 0
+    locations: classpath:db/migration
+    validate-on-migrate: true
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+  mail:
+    host: ${SMTP_HOST:}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USERNAME:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: ${SMTP_AUTH:true}
+          starttls:
+            enable: ${SMTP_STARTTLS_ENABLE:true}
+
+server:
+  port: ${PORT:8080}
+
+jwt:
+  secret: ${JWT_SECRET}
+  issuer: ${JWT_ISSUER:bioqc-api}
+  # Access token: 60 min (3.600.000 ms) — sessao util sem forcar logout em inatividade curta
+  access-token-expiry: ${JWT_ACCESS_TOKEN_EXPIRY:3600000}
+  # Refresh token: 30 dias (2.592.000.000 ms) — janela longa, protegido por cookie httpOnly
+  refresh-token-expiry: ${JWT_REFRESH_TOKEN_EXPIRY:2592000000}
+
+gemini:
+  api-key: ${GEMINI_API_KEY:}
+  model: ${GEMINI_MODEL:gemini-1.5-flash}
+
+cors:
+  allowed-origins: ${CORS_ORIGINS:http://localhost:5173}
+
+reports:
+  v2:
+    enabled: ${REPORTS_V2_ENABLED:false}
+    storage:
+      dir: ${REPORTS_V2_STORAGE_DIR:}
+    public-base-url: ${REPORTS_V2_PUBLIC_BASE_URL:}
+    default-retention-days: ${REPORTS_V2_DEFAULT_RETENTION_DAYS:1825}
+    verify-rate-limit-per-minute-per-ip: ${REPORTS_V2_VERIFY_RATE_LIMIT:10}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: bioqc-api
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+
+app:
+  frontend-url: ${APP_FRONTEND_URL:http://localhost:5173}
+  auth:
+    refresh-cookie:
+      name: ${AUTH_REFRESH_COOKIE_NAME:refresh_token}
+      path: ${AUTH_REFRESH_COOKIE_PATH:/api/auth}
+      domain: ${AUTH_REFRESH_COOKIE_DOMAIN:}
+      secure: ${AUTH_REFRESH_COOKIE_SECURE:false}
+      same-site: ${AUTH_REFRESH_COOKIE_SAME_SITE:Lax}
+    login-rate-limit:
+      max-attempts: ${AUTH_LOGIN_RATE_LIMIT_MAX_ATTEMPTS:5}
+      window-seconds: ${AUTH_LOGIN_RATE_LIMIT_WINDOW_SECONDS:60}
+  password-reset:
+    path: ${PASSWORD_RESET_PATH:/reset-password}
+    token-ttl-minutes: ${PASSWORD_RESET_TOKEN_TTL_MINUTES:60}
+    expose-link-in-response: ${PASSWORD_RESET_EXPOSE_LINK:false}
+    from-email: ${PASSWORD_RESET_FROM_EMAIL:${spring.mail.username:no-reply@bioqc.local}}

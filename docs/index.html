@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BioQC — production-grade Quality Control platform for clinical laboratories. Java/Spring Boot + React/TypeScript. ISO 15189-aware. Built and deployed by Otavio Machado." />
+  <meta name="author" content="Otavio Machado" />
+  <meta property="og:title" content="BioQC — Lab Quality Control Platform" />
+  <meta property="og:description" content="Westgard rules, signed PDF reports, full audit trail. Java/Spring Boot + React. Live demo + open source." />
+  <meta property="og:type" content="website" />
+  <title>BioQC — Lab Quality Control Platform · Otavio Machado</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
+    .gradient-text {
+      background: linear-gradient(135deg, #06b6d4 0%, #10b981 50%, #6366f1 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-bg {
+      background: radial-gradient(ellipse at top, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+    }
+    .card-hover {
+      transition: all 0.2s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px -10px rgba(6, 182, 212, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+
+  <!-- Nav -->
+  <nav class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/70 border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 font-bold text-lg">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center text-slate-950 font-extrabold">B</span>
+        <span>BioQC</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm text-slate-300">
+        <a href="#features" class="hover:text-cyan-400 transition">Features</a>
+        <a href="#stack" class="hover:text-cyan-400 transition">Stack</a>
+        <a href="#case-study" class="hover:text-cyan-400 transition">Case Study</a>
+        <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
+        <a href="https://github.com/otavio0machado/bioqc" class="px-4 py-1.5 border border-slate-700 rounded-lg hover:border-cyan-400 transition">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="gradient-bg py-24 md:py-32">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-emerald-400/10 border border-emerald-400/30 text-emerald-300 text-xs font-medium tracking-wider uppercase mb-6">
+        ⬢ In Production at a Real Clinical Lab
+      </span>
+      <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+        <span class="gradient-text">Quality Control</span><br />
+        <span class="text-slate-100">for Clinical Labs.</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+        Westgard multirules, signed PDF reports, ISO 15189 traceability.<br />
+        <span class="text-slate-500">Java/Spring Boot · React/TypeScript · Postgres · 406 tests passing.</span>
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://bioqc-demo.vercel.app" class="px-8 py-3.5 rounded-lg bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-semibold transition shadow-lg shadow-cyan-500/20">
+          → Try the Live Demo
+        </a>
+        <a href="https://github.com/otavio0machado/bioqc" class="px-8 py-3.5 rounded-lg border border-slate-700 hover:border-cyan-400 text-slate-200 font-medium transition">
+          View Source on GitHub
+        </a>
+      </div>
+      <div class="mt-12 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-slate-900/60 border border-slate-800 text-sm text-slate-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Demo credentials: <code class="text-cyan-300">admin@demo.bioqc.dev</code> / <code class="text-cyan-300">Demo123!</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics -->
+  <section class="py-16 border-y border-slate-800 bg-slate-900/30">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div>
+        <div class="text-4xl md:text-5xl font-bold gradient-text">282</div>
+        <div class="text-sm text-slate-400 mt-2 uppercase tracking-wider">Java files</div>
+      </div>
+      <div>
+        <div class="text-4xl md:text-5xl font-bold gradient-text">116</div>
+        <div class="text-sm text-slate-400 mt-2 uppercase tracking-wider">React/TS files</div>
+      </div>
+      <div>
+        <div class="text-4xl md:text-5xl font-bold gradient-text">406</div>
+        <div class="text-sm text-slate-400 mt-2 uppercase tracking-wider">Tests passing</div>
+      </div>
+      <div>
+        <div class="text-4xl md:text-5xl font-bold gradient-text">15</div>
+        <div class="text-sm text-slate-400 mt-2 uppercase tracking-wider">DB migrations</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Built for Regulated Labs</h2>
+        <p class="text-slate-400 text-lg max-w-2xl mx-auto">Every feature was driven by real ISO 15189 audit requirements, not invented in a spec doc.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div class="w-12 h-12 rounded-lg bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Westgard Engine</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Stateless evaluator for <code class="text-cyan-300 text-xs">1-2s</code>, <code class="text-cyan-300 text-xs">1-3s</code>, <code class="text-cyan-300 text-xs">2-2s</code>, <code class="text-cyan-300 text-xs">R-4s</code>, <code class="text-cyan-300 text-xs">4-1s</code>, <code class="text-cyan-300 text-xs">10x</code>. Levey-Jennings charts rendered server-side via JFreeChart.</p>
+        </div>
+
+        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div class="w-12 h-12 rounded-lg bg-emerald-400/10 border border-emerald-400/30 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Signed PDF Reports</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Hash-chained signature log — each PDF references the previous signature. QR code on the printout points to <code class="text-cyan-300 text-xs">/verify/{hash}</code> for tamper detection.</p>
+        </div>
+
+        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div class="w-12 h-12 rounded-lg bg-indigo-400/10 border border-indigo-400/30 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Reagent Traceability</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Lot lifecycle state machine (waiting → open → in-use → end-of-use → archived). Per-unit tracking. Lot ↔ patient result chain answers any audit question in seconds.</p>
+        </div>
+
+        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div class="w-12 h-12 rounded-lg bg-rose-400/10 border border-rose-400/30 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">RBAC + Audit</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Role-based permissions per resource and action. Every mutation persisted with actor, timestamp, before/after diff. JWT + refresh rotation on HttpOnly cookies.</p>
+        </div>
+
+        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div class="w-12 h-12 rounded-lg bg-amber-400/10 border border-amber-400/30 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">AI Commentary (Gemini)</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Optional plain-Portuguese summary of monthly QC trends, appended to the regulatory report alongside deterministic statistics. Treated as advisory, never as source of truth.</p>
+        </div>
+
+        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+          <div class="w-12 h-12 rounded-lg bg-violet-400/10 border border-violet-400/30 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Production Observability</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Prometheus metrics, structured JSON logging via logstash-logback, correlation IDs propagated end-to-end. Flyway migrations with dry-run rehearsal scripts.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack -->
+  <section id="stack" class="py-24 bg-slate-900/30 border-y border-slate-800">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Pragmatic Stack</h2>
+        <p class="text-slate-400 text-lg max-w-2xl mx-auto">Boring, mature, well-understood. Optimized for correctness and operability, not novelty.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl bg-slate-950 border border-slate-800">
+          <h3 class="text-sm uppercase tracking-wider text-slate-500 mb-4">Backend</h3>
+          <ul class="space-y-2 text-slate-200">
+            <li>· Java 21</li>
+            <li>· Spring Boot 3.3</li>
+            <li>· Spring Security + JWT (jjwt)</li>
+            <li>· Spring Data JPA / Hibernate</li>
+            <li>· Flyway · OpenPDF · JFreeChart</li>
+            <li>· ZXing · Caffeine · Micrometer</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-xl bg-slate-950 border border-slate-800">
+          <h3 class="text-sm uppercase tracking-wider text-slate-500 mb-4">Frontend</h3>
+          <ul class="space-y-2 text-slate-200">
+            <li>· React 18 + Vite</li>
+            <li>· TypeScript 5.9</li>
+            <li>· TanStack Query</li>
+            <li>· React Hook Form + Zod</li>
+            <li>· Tailwind CSS 4</li>
+            <li>· Recharts · Axios</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-xl bg-slate-950 border border-slate-800">
+          <h3 class="text-sm uppercase tracking-wider text-slate-500 mb-4">Platform</h3>
+          <ul class="space-y-2 text-slate-200">
+            <li>· PostgreSQL on Supabase</li>
+            <li>· Spring Boot in Docker</li>
+            <li>· Railway (API)</li>
+            <li>· Vercel (Web)</li>
+            <li>· JUnit 5 · MockMvc · Vitest</li>
+            <li>· logstash-logback · Prometheus</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section id="case-study" class="py-24">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="text-cyan-400 text-sm font-medium uppercase tracking-wider">Case Study</span>
+        <h2 class="text-4xl md:text-5xl font-bold mt-2 mb-4">From Python desktop app to web platform</h2>
+        <p class="text-slate-400 text-lg">Migrating a clinical lab's QC operation without disrupting daily work.</p>
+      </div>
+
+      <div class="space-y-6">
+        <div class="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+          <h3 class="text-lg font-semibold text-rose-300 mb-2">⚠ The Situation</h3>
+          <p class="text-slate-300 leading-relaxed">A Brazilian clinical lab was running daily QC on a homegrown Python desktop app. Single-machine bottleneck (one analyst at a time). Reports were Word docs anyone could edit retroactively. Reagent traceability was an Excel spreadsheet. ISO 15189 surveillance was approaching.</p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+          <h3 class="text-lg font-semibold text-amber-300 mb-2">⚙ The Action</h3>
+          <p class="text-slate-300 leading-relaxed">Sole engineer on the rebuild. Spring Boot + React. Westgard rules as pure functions. Hash-chained signatures for tamper-evident reports. Reagent state machine. Paridade-first migration: ran old + new in parallel for 1-2 weeks per module before cutover.</p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
+          <h3 class="text-lg font-semibold text-emerald-300 mb-2">✓ The Result</h3>
+          <p class="text-slate-300 leading-relaxed">Cutover with zero analyst downtime. 15 production migrations shipped. 406 tests passing. Monthly regulatory reports auditors accept without follow-up. Multiple analysts working in parallel. Lot ↔ patient result traceability in seconds.</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="https://github.com/otavio0machado/bioqc/blob/main/CASE_STUDY.md" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium">
+          Read the full case study →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-24 bg-gradient-to-b from-slate-900/30 to-slate-950 border-t border-slate-800">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">Hire Me</h2>
+      <p class="text-slate-300 text-lg leading-relaxed mb-10">
+        I'm <strong class="text-white">Otavio Machado</strong>, a full-stack engineer based in Brazil specializing in regulated, data-heavy domains — clinical labs, healthcare, finance, compliance. Available for backend (Java/Spring, Node), frontend (React/TypeScript), and full-stack migrations.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-10">
+        <a href="mailto:otavio100206@gmail.com" class="p-6 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-cyan-400 transition group">
+          <div class="text-3xl mb-2">📧</div>
+          <div class="text-sm text-slate-400 group-hover:text-cyan-400 transition">Email</div>
+          <div class="text-slate-200 font-medium mt-1 break-all">otavio100206@gmail.com</div>
+        </a>
+        <a href="https://github.com/otavio0machado" class="p-6 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-cyan-400 transition group">
+          <div class="text-3xl mb-2">🐙</div>
+          <div class="text-sm text-slate-400 group-hover:text-cyan-400 transition">GitHub</div>
+          <div class="text-slate-200 font-medium mt-1">@otavio0machado</div>
+        </a>
+        <a href="https://www.linkedin.com/in/machado-otavio/" class="p-6 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-cyan-400 transition group">
+          <div class="text-3xl mb-2">💼</div>
+          <div class="text-sm text-slate-400 group-hover:text-cyan-400 transition">LinkedIn</div>
+          <div class="text-slate-200 font-medium mt-1">@machado-otavio</div>
+        </a>
+      </div>
+
+      <a href="mailto:otavio100206@gmail.com?subject=Project%20inquiry%20from%20BioQC%20portfolio" class="inline-block px-8 py-3.5 rounded-lg bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-semibold transition shadow-lg shadow-cyan-500/20">
+        Start a conversation →
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 border-t border-slate-800 text-center text-slate-500 text-sm">
+    <div class="max-w-6xl mx-auto px-6">
+      <p>BioQC is a sanitized portfolio version of a system I built for a clinical lab client, published with explicit authorization. All data is fictitious.</p>
+      <p class="mt-2">© 2026 Otavio Machado · MIT License · <a href="https://github.com/otavio0machado/bioqc" class="text-slate-400 hover:text-cyan-400">Source on GitHub</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

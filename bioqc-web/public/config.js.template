@@ -1,0 +1,4 @@
+window.__APP_CONFIG__ = Object.freeze({
+  apiUrl: "${RUNTIME_API_URL}",
+  siteUrl: "${SEO_SITE_URL}"
+})

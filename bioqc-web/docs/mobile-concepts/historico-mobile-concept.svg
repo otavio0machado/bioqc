@@ -1,0 +1,99 @@
+<svg width="900" height="1600" viewBox="0 0 900 1600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgHist" x1="100" y1="90" x2="780" y2="1510" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEF8F1"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="bannerHist" x1="210" y1="190" x2="676" y2="468" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#166534"/>
+    </linearGradient>
+    <filter id="shadowHist" x="80" y="90" width="740" height="1430" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#0F172A" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="1600" rx="48" fill="url(#bgHist)"/>
+  <circle cx="770" cy="210" r="92" fill="#DCFCE7"/>
+  <circle cx="120" cy="1370" r="110" fill="#E0F2FE"/>
+
+  <text x="450" y="92" text-anchor="middle" fill="#14532D" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">Concept 3 · Historico e Levey-Jennings</text>
+  <text x="450" y="128" text-anchor="middle" fill="#4B5563" font-family="Inter, Arial, sans-serif" font-size="20">Leitura visual rapida com foco em tendencia e rastreabilidade</text>
+
+  <g filter="url(#shadowHist)">
+    <rect x="150" y="150" width="600" height="1320" rx="58" fill="#0F172A"/>
+    <rect x="175" y="175" width="550" height="1270" rx="44" fill="#F8FBFA"/>
+    <rect x="350" y="192" width="200" height="26" rx="13" fill="#0B1220"/>
+  </g>
+
+  <rect x="175" y="175" width="550" height="250" rx="44" fill="url(#bannerHist)"/>
+  <text x="220" y="244" fill="#BBF7D0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">HISTORICO ANALITICO</text>
+  <text x="220" y="300" fill="white" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="700">Levey-Jennings</text>
+  <text x="220" y="338" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="21">Glicose · Lote 042 · tendencia por periodo</text>
+
+  <rect x="220" y="364" width="76" height="40" rx="20" fill="#DCFCE7"/>
+  <text x="258" y="390" text-anchor="middle" fill="#166534" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">7d</text>
+  <rect x="308" y="364" width="90" height="40" rx="20" fill="rgba(255,255,255,0.12)"/>
+  <text x="353" y="390" text-anchor="middle" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">30d</text>
+  <rect x="412" y="364" width="90" height="40" rx="20" fill="rgba(255,255,255,0.12)"/>
+  <text x="457" y="390" text-anchor="middle" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">90d</text>
+
+  <rect x="210" y="446" width="480" height="410" rx="34" fill="white"/>
+  <text x="240" y="494" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Tendencia do controle</text>
+  <text x="240" y="525" fill="#6B7280" font-family="Inter, Arial, sans-serif" font-size="18">Media 102 · DP 3.5 · regras coloridas por faixa</text>
+
+  <rect x="250" y="560" width="390" height="220" rx="28" fill="#F8FAFC"/>
+  <line x1="272" y1="600" x2="620" y2="600" stroke="#FCA5A5" stroke-width="4" stroke-dasharray="10 10"/>
+  <line x1="272" y1="640" x2="620" y2="640" stroke="#FCD34D" stroke-width="4" stroke-dasharray="10 10"/>
+  <line x1="272" y1="680" x2="620" y2="680" stroke="#BBF7D0" stroke-width="4"/>
+  <line x1="272" y1="720" x2="620" y2="720" stroke="#FCD34D" stroke-width="4" stroke-dasharray="10 10"/>
+  <line x1="272" y1="760" x2="620" y2="760" stroke="#FCA5A5" stroke-width="4" stroke-dasharray="10 10"/>
+  <polyline points="282,700 326,690 370,668 414,650 458,674 502,632 546,606 590,620 618,658" fill="none" stroke="#166534" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="282" cy="700" r="8" fill="#166534"/>
+  <circle cx="326" cy="690" r="8" fill="#166534"/>
+  <circle cx="370" cy="668" r="8" fill="#166534"/>
+  <circle cx="414" cy="650" r="8" fill="#166534"/>
+  <circle cx="458" cy="674" r="8" fill="#166534"/>
+  <circle cx="502" cy="632" r="8" fill="#D97706"/>
+  <circle cx="546" cy="606" r="8" fill="#DC2626"/>
+  <circle cx="590" cy="620" r="8" fill="#D97706"/>
+  <circle cx="618" cy="658" r="8" fill="#166534"/>
+  <text x="262" y="603" fill="#B91C1C" font-family="Inter, Arial, sans-serif" font-size="15">+3 DP</text>
+  <text x="262" y="643" fill="#B45309" font-family="Inter, Arial, sans-serif" font-size="15">+2 DP</text>
+  <text x="262" y="683" fill="#15803D" font-family="Inter, Arial, sans-serif" font-size="15">Media</text>
+  <text x="262" y="723" fill="#B45309" font-family="Inter, Arial, sans-serif" font-size="15">-2 DP</text>
+  <text x="262" y="763" fill="#B91C1C" font-family="Inter, Arial, sans-serif" font-size="15">-3 DP</text>
+
+  <rect x="240" y="796" width="118" height="32" rx="16" fill="#FEE2E2"/>
+  <text x="299" y="817" text-anchor="middle" fill="#B91C1C" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">1-3s em 14/04</text>
+  <rect x="372" y="796" width="128" height="32" rx="16" fill="#FEF3C7"/>
+  <text x="436" y="817" text-anchor="middle" fill="#B45309" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">1-2s em 15/04</text>
+  <rect x="514" y="796" width="118" height="32" rx="16" fill="#DCFCE7"/>
+  <text x="573" y="817" text-anchor="middle" fill="#15803D" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">Retorno OK</text>
+
+  <rect x="210" y="880" width="480" height="118" rx="30" fill="#FFF7ED"/>
+  <text x="240" y="924" fill="#9A3412" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">INSIGHT DO APP</text>
+  <text x="240" y="964" fill="#7C2D12" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">Tendencia de alta antes do pico</text>
+  <text x="240" y="993" fill="#9A3412" font-family="Inter, Arial, sans-serif" font-size="18">Sugestao: revisar calibracao e repetir o controle.</text>
+
+  <rect x="210" y="1022" width="480" height="336" rx="34" fill="white"/>
+  <text x="240" y="1070" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Lancamentos recentes</text>
+
+  <rect x="240" y="1096" width="420" height="68" rx="24" fill="#F9FAFB"/>
+  <text x="268" y="1135" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">15/04 · 08:12 · 104 mg/dL</text>
+  <rect x="548" y="1110" width="86" height="34" rx="17" fill="#DCFCE7"/>
+  <text x="591" y="1132" text-anchor="middle" fill="#15803D" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">OK</text>
+
+  <rect x="240" y="1178" width="420" height="68" rx="24" fill="#F9FAFB"/>
+  <text x="268" y="1217" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">14/04 · 17:35 · 111 mg/dL</text>
+  <rect x="520" y="1192" width="114" height="34" rx="17" fill="#FEF3C7"/>
+  <text x="577" y="1214" text-anchor="middle" fill="#B45309" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">1-2s</text>
+
+  <rect x="240" y="1260" width="420" height="68" rx="24" fill="#F9FAFB"/>
+  <text x="268" y="1299" fill="#111827" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">14/04 · 08:05 · 114 mg/dL</text>
+  <rect x="520" y="1274" width="114" height="34" rx="17" fill="#FEE2E2"/>
+  <text x="577" y="1296" text-anchor="middle" fill="#B91C1C" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">1-3s</text>
+
+  <rect x="210" y="1378" width="480" height="60" rx="30" fill="#166534"/>
+  <text x="450" y="1417" text-anchor="middle" fill="white" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Exportar PDF e historico por lote</text>
+</svg>

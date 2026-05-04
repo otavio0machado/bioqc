@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Biodiagnóstico — Mobile App · Claude Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ===== Anthropic Brand Tokens ===== */
+  :root {
+    --dark: #141413;
+    --light: #faf9f5;
+    --mid-gray: #b0aea5;
+    --light-gray: #e8e6dc;
+    --orange: #d97757;
+    --orange-soft: #f4d3c2;
+    --blue: #6a9bcc;
+    --blue-soft: #d6e3f1;
+    --green: #788c5d;
+    --green-soft: #d8e0cb;
+    --red: #c0594a;
+    --red-soft: #f1d5cf;
+    --amber: #c69141;
+    --amber-soft: #f3e2c5;
+    --font-head: 'Poppins', Arial, sans-serif;
+    --font-body: 'Lora', Georgia, serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--light);
+    color: var(--dark);
+    font-family: var(--font-body);
+    line-height: 1.45;
+    min-height: 100%;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(rgba(20,20,19,0.05) 1px, transparent 1px),
+      radial-gradient(rgba(20,20,19,0.04) 1px, transparent 1px);
+    background-size: 28px 28px, 56px 56px;
+    background-position: 0 0, 14px 14px;
+  }
+
+  .page {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 64px 32px 96px;
+  }
+
+  /* ===== Header ===== */
+  .pageHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--light-gray);
+    margin-bottom: 56px;
+  }
+  .eyebrow {
+    font-family: var(--font-head);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--orange);
+    font-size: 12px;
+  }
+  .pageTitle {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    max-width: 18ch;
+  }
+  .pageDek {
+    font-family: var(--font-body);
+    font-size: 20px;
+    color: #4d4c47;
+    max-width: 62ch;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 8px;
+    font-family: var(--font-head);
+    font-size: 13px;
+    color: #5a5953;
+  }
+  .meta b { color: var(--dark); font-weight: 600; }
+  .swatchRow { display: flex; gap: 8px; margin-top: 4px; align-items: center; }
+  .swatch {
+    width: 18px; height: 18px; border-radius: 6px;
+    border: 1px solid rgba(20,20,19,0.08);
+  }
+  .swatch.dark { background: var(--dark); }
+  .swatch.light { background: var(--light); }
+  .swatch.gray { background: var(--mid-gray); }
+  .swatch.orange { background: var(--orange); }
+  .swatch.blue { background: var(--blue); }
+  .swatch.green { background: var(--green); }
+
+  /* ===== Phone grid ===== */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px 40px;
+    justify-items: center;
+  }
+  @media (max-width: 1180px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+
+  .frameWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    max-width: 380px;
+  }
+  .frameLabel {
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+  .frameTitle {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--dark);
+    text-align: center;
+    margin-top: -8px;
+  }
+  .frameDek {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: #5a5953;
+    text-align: center;
+    max-width: 30ch;
+  }
+
+  /* ===== iPhone frame ===== */
+  .phone {
+    width: 360px;
+    height: 760px;
+    background: #000;
+    border-radius: 48px;
+    padding: 12px;
+    box-shadow:
+      0 30px 70px -20px rgba(20,20,19,0.35),
+      0 8px 18px -8px rgba(20,20,19,0.18),
+      inset 0 0 0 1.5px #2a2a28;
+    position: relative;
+  }
+  .phone::before, .phone::after {
+    content: ''; position: absolute; background: #2a2a28;
+  }
+  .phone::before { left: -2px; top: 130px; width: 3px; height: 60px; border-radius: 2px; }
+  .phone::after  { right: -2px; top: 110px; width: 3px; height: 36px; border-radius: 2px; }
+  .screen {
+    width: 100%;
+    height: 100%;
+    background: var(--light);
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .notch {
+    position: absolute;
+    top: 8px; left: 50%;
+    transform: translateX(-50%);
+    width: 110px; height: 28px;
+    background: #000;
+    border-radius: 18px;
+    z-index: 30;
+  }
+
+  /* ===== Status bar ===== */
+  .statusBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 26px 6px;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--dark);
+  }
+  .statusIcons { display: flex; gap: 6px; align-items: center; }
+  .signal, .wifi, .battery { display: inline-flex; gap: 1.5px; align-items: flex-end; }
+  .signal i { display: block; width: 3px; background: var(--dark); border-radius: 1px; }
+  .signal i:nth-child(1){ height: 4px; } .signal i:nth-child(2){ height: 6px; }
+  .signal i:nth-child(3){ height: 8px; } .signal i:nth-child(4){ height: 10px; }
+  .battery {
+    width: 24px; height: 11px; border: 1.2px solid var(--dark);
+    border-radius: 3px; padding: 1px; position: relative;
+  }
+  .battery::after {
+    content: ''; position: absolute; right: -3px; top: 3px;
+    width: 2px; height: 4px; background: var(--dark); border-radius: 0 1px 1px 0;
+  }
+  .battery span { display: block; height: 100%; width: 80%; background: var(--dark); border-radius: 1px; }
+
+  /* ===== App content base ===== */
+  .app {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-top: 6px;
+  }
+  .appHeader {
+    padding: 14px 22px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .brandMark {
+    width: 32px; height: 32px;
+    background: var(--orange);
+    border-radius: 9px;
+    display: grid; place-items: center;
+    color: var(--light); font-family: var(--font-head); font-weight: 700; font-size: 15px;
+    box-shadow: inset 0 -3px 0 rgba(20,20,19,0.18);
+  }
+  .brandName {
+    font-family: var(--font-head); font-weight: 600; font-size: 15px; color: var(--dark);
+    letter-spacing: -0.01em;
+  }
+  .brandSub {
+    font-family: var(--font-head); font-weight: 500; font-size: 10px;
+    color: var(--mid-gray); letter-spacing: 0.18em; text-transform: uppercase;
+    margin-top: -2px;
+  }
+  .iconBtn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--light-gray);
+    display: grid; place-items: center;
+    color: var(--dark);
+    border: none; cursor: pointer;
+  }
+  .iconBtn svg { width: 16px; height: 16px; stroke-width: 2; }
+
+  /* ===== Common app helpers ===== */
+  .scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px 22px 110px;
+  }
+  .h1 {
+    font-family: var(--font-head); font-weight: 600;
+    font-size: 26px; line-height: 1.15; letter-spacing: -0.02em; color: var(--dark);
+  }
+  .h2 {
+    font-family: var(--font-head); font-weight: 600;
+    font-size: 16px; color: var(--dark); letter-spacing: -0.01em;
+  }
+  .lead {
+    font-family: var(--font-body); font-size: 14px; color: #5a5953; margin-top: 4px;
+  }
+  .small { font-family: var(--font-head); font-weight: 500; font-size: 11px; color: var(--mid-gray); letter-spacing: 0.12em; text-transform: uppercase; }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--light-gray);
+    border-radius: 18px;
+    padding: 16px;
+  }
+  .cardLine + .cardLine { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--light-gray); }
+
+  .btn {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn.primary { background: var(--orange); color: var(--light); }
+  .btn.dark { background: var(--dark); color: var(--light); }
+  .btn.ghost { background: var(--light-gray); color: var(--dark); }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 10px; border-radius: 100px;
+    font-family: var(--font-head); font-weight: 500; font-size: 11px;
+    background: var(--light-gray); color: var(--dark);
+  }
+  .chip.green { background: var(--green-soft); color: #3e4a31; }
+  .chip.orange { background: var(--orange-soft); color: #7a3717; }
+  .chip.blue { background: var(--blue-soft); color: #2f5276; }
+  .chip.red { background: var(--red-soft); color: #6e261c; }
+  .chip.amber { background: var(--amber-soft); color: #6f4912; }
+
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .dot.green { background: var(--green); } .dot.orange { background: var(--orange); }
+  .dot.blue { background: var(--blue); } .dot.red { background: var(--red); }
+  .dot.amber { background: var(--amber); }
+
+  /* ===== Bottom nav ===== */
+  .tabbar {
+    position: absolute;
+    left: 12px; right: 12px; bottom: 14px;
+    background: rgba(250, 249, 245, 0.92);
+    backdrop-filter: blur(18px);
+    border: 1px solid var(--light-gray);
+    border-radius: 22px;
+    padding: 10px 12px;
+    display: flex; justify-content: space-around; align-items: center;
+    box-shadow: 0 12px 30px -12px rgba(20,20,19,0.18);
+    z-index: 20;
+  }
+  .tab {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    color: var(--mid-gray);
+    background: none; border: none;
+    padding: 6px 10px; cursor: pointer;
+    font-family: var(--font-head); font-weight: 500; font-size: 10px;
+  }
+  .tab svg { width: 20px; height: 20px; stroke-width: 1.8; }
+  .tab.active {
+    color: var(--dark);
+  }
+  .tab.active .tabIcon {
+    background: var(--dark);
+    color: var(--light);
+  }
+  .tabIcon {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: grid; place-items: center;
+    transition: all .2s ease;
+  }
+  .tab.active .tabIcon { box-shadow: 0 8px 18px -6px rgba(20,20,19,0.45); }
+
+  .homeIndicator {
+    position: absolute;
+    left: 50%; bottom: 6px; transform: translateX(-50%);
+    width: 110px; height: 4px; border-radius: 4px;
+    background: rgba(255,255,255,0.5);
+    z-index: 40;
+  }
+
+  /* ====== SCREEN: Login ====== */
+  .login {
+    flex: 1;
+    padding: 48px 26px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background:
+      radial-gradient(circle at top right, rgba(217,119,87,0.18), transparent 55%),
+      radial-gradient(circle at bottom left, rgba(120,140,93,0.16), transparent 55%),
+      var(--light);
+  }
+  .loginBrand { display: flex; align-items: center; gap: 12px; }
+  .loginMark {
+    width: 56px; height: 56px; border-radius: 16px;
+    background: var(--dark); color: var(--light);
+    display: grid; place-items: center;
+    font-family: var(--font-head); font-weight: 700; font-size: 22px;
+    box-shadow: 0 18px 30px -12px rgba(20,20,19,0.4);
+  }
+  .loginGreet h1 {
+    font-family: var(--font-head); font-weight: 600; font-size: 36px; line-height: 1.05;
+    letter-spacing: -0.02em; color: var(--dark); margin-top: 36px;
+  }
+  .loginGreet h1 em { font-family: var(--font-body); font-style: italic; font-weight: 500; color: var(--orange); }
+  .loginGreet p { font-family: var(--font-body); font-size: 15px; color: #5a5953; margin-top: 12px; max-width: 28ch; }
+
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-family: var(--font-head); font-weight: 500; font-size: 12px; color: var(--dark); letter-spacing: 0.04em; }
+  .field .input {
+    background: #fff;
+    border: 1px solid var(--light-gray);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-family: var(--font-body); font-size: 14px; color: var(--dark);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .field .input.focus { border-color: var(--orange); box-shadow: 0 0 0 4px rgba(217,119,87,0.18); }
+  .field .input svg { width: 16px; height: 16px; color: var(--mid-gray); }
+
+  .loginForm { display: flex; flex-direction: column; gap: 14px; margin-top: 30px; }
+  .forgot {
+    text-align: right;
+    font-family: var(--font-head); font-weight: 500; font-size: 12px; color: var(--dark);
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .loginFooter { text-align: center; font-family: var(--font-body); font-size: 12px; color: #5a5953; }
+  .loginFooter b { font-family: var(--font-head); color: var(--orange); font-weight: 600; }
+
+  /* ====== SCREEN: Dashboard ====== */
+  .heroCard {
+    background: var(--dark);
+    color: var(--light);
+    border-radius: 22px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .heroCard::before {
+    content: ''; position: absolute; right: -40px; top: -40px;
+    width: 160px; height: 160px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(217,119,87,0.6), transparent 70%);
+  }
+  .heroEyebrow {
+    font-family: var(--font-head); font-weight: 500; font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--orange-soft);
+  }
+  .heroValue {
+    font-family: var(--font-head); font-weight: 700; font-size: 56px; line-height: 1; letter-spacing: -0.03em;
+    margin-top: 8px;
+  }
+  .heroValue em { font-family: var(--font-body); font-weight: 500; font-size: 24px; font-style: normal; color: var(--orange-soft); margin-left: 6px; }
+  .heroDek {
+    font-family: var(--font-body); font-size: 13px; color: rgba(250,249,245,0.7); margin-top: 8px;
+  }
+  .heroBadge {
+    margin-top: 16px; display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(250,249,245,0.12); padding: 8px 12px; border-radius: 100px;
+    font-family: var(--font-head); font-weight: 500; font-size: 12px;
+  }
+
+  .kpiGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+  .kpi {
+    background: #fff; border: 1px solid var(--light-gray);
+    border-radius: 18px; padding: 14px;
+  }
+  .kpi .num { font-family: var(--font-head); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; color: var(--dark); }
+  .kpi .lbl { font-family: var(--font-head); font-weight: 500; font-size: 12px; color: #5a5953; }
+  .kpi .ic {
+    width: 32px; height: 32px; border-radius: 10px;
+    display: grid; place-items: center; margin-bottom: 8px;
+  }
+  .kpi.a .ic { background: var(--orange-soft); color: #7a3717; }
+  .kpi.b .ic { background: var(--green-soft); color: #3e4a31; }
+  .kpi.c .ic { background: var(--blue-soft); color: #2f5276; }
+  .kpi.d .ic { background: var(--amber-soft); color: #6f4912; }
+  .kpi svg { width: 16px; height: 16px; }
+
+  .sectionHd {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin: 22px 0 10px;
+  }
+  .sectionHd a { font-family: var(--font-head); font-weight: 500; font-size: 12px; color: var(--orange); text-decoration: none; }
+
+  .alert {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 14px;
+    border-radius: 16px;
+    background: #fff; border: 1px solid var(--light-gray);
+  }
+  .alert + .alert { margin-top: 10px; }
+  .alert .ai {
+    width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0;
+  }
+  .alert.amber { background: #fdf6e8; border-color: #f3e2c5; }
+  .alert.amber .ai { background: var(--amber); color: var(--light); }
+  .alert.red { background: #fbebe7; border-color: #f1d5cf; }
+  .alert.red .ai { background: var(--red); color: var(--light); }
+  .alert h4 { font-family: var(--font-head); font-weight: 600; font-size: 13px; color: var(--dark); }
+  .alert p { font-family: var(--font-body); font-size: 12px; color: #5a5953; margin-top: 2px; }
+  .alert svg { width: 16px; height: 16px; }
+
+  /* ====== SCREEN: Áreas ====== */
+  .greet {
+    padding: 6px 0 18px;
+  }
+  .greet .small { color: var(--orange); }
+  .greet h1 {
+    font-family: var(--font-head); font-weight: 600; font-size: 28px; letter-spacing: -0.02em; color: var(--dark); margin-top: 6px;
+  }
+  .greet h1 em { font-family: var(--font-body); font-weight: 500; font-style: italic; color: var(--orange); }
+
+  .searchBar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid var(--light-gray);
+    border-radius: 14px;
+    margin: 4px 0 18px;
+  }
+  .searchBar svg { width: 16px; height: 16px; color: var(--mid-gray); }
+  .searchBar input {
+    border: none; outline: none; background: transparent;
+    font-family: var(--font-body); font-size: 14px; color: var(--dark); flex: 1;
+  }
+
+  .areasGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .areaCard {
+    background: #fff; border: 1px solid var(--light-gray);
+    border-radius: 20px; padding: 16px; min-height: 140px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+  }
+  .areaCard.feature {
+    grid-column: span 2;
+    background: linear-gradient(135deg, var(--orange) 0%, #c46347 100%);
+    color: var(--light);
+    border: none;
+    min-height: 130px;
+  }
+  .areaCard.feature::after {
+    content: ''; position: absolute; right: -30px; bottom: -30px;
+    width: 160px; height: 160px; border-radius: 50%;
+    background: rgba(250,249,245,0.12);
+  }
+  .areaCard .ai {
+    width: 40px; height: 40px; border-radius: 12px;
+    display: grid; place-items: center; background: var(--light-gray); color: var(--dark);
+  }
+  .areaCard.feature .ai { background: rgba(250,249,245,0.2); color: var(--light); }
+  .areaCard h3 {
+    font-family: var(--font-head); font-weight: 600; font-size: 16px; color: var(--dark); letter-spacing: -0.01em;
+  }
+  .areaCard.feature h3 { color: var(--light); font-size: 20px; }
+  .areaCard small {
+    font-family: var(--font-body); font-size: 12px; color: #5a5953;
+  }
+  .areaCard.feature small { color: rgba(250,249,245,0.8); }
+  .areaCard svg { width: 18px; height: 18px; }
+  .areaMeta {
+    display: flex; align-items: center; gap: 6px; margin-top: 6px;
+    font-family: var(--font-head); font-weight: 500; font-size: 11px;
+  }
+  .areaCard.feature .areaMeta { color: var(--light); }
+
+  /* ====== SCREEN: Registro CQ ====== */
+  .topBar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 22px 16px;
+  }
+  .backBtn {
+    background: none; border: none; cursor: pointer;
+    width: 38px; height: 38px; border-radius: 12px;
+    display: grid; place-items: center;
+    background: var(--light-gray);
+  }
+  .backBtn svg { width: 16px; height: 16px; color: var(--dark); }
+  .topTitle {
+    font-family: var(--font-head); font-weight: 600; font-size: 14px; color: var(--dark); letter-spacing: -0.01em;
+  }
+
+  .formGroup { margin-top: 14px; }
+  .formGroup label { display: block; font-family: var(--font-head); font-weight: 500; font-size: 12px; color: #5a5953; margin-bottom: 6px; letter-spacing: 0.04em; }
+  .formGroup .ctrl {
+    background: #fff; border: 1px solid var(--light-gray);
+    border-radius: 14px; padding: 14px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-body); font-size: 14px; color: var(--dark);
+  }
+  .formGroup .ctrl.large {
+    padding: 18px;
+  }
+  .formGroup .ctrl .val {
+    font-family: var(--font-head); font-weight: 700; font-size: 28px; color: var(--dark); letter-spacing: -0.02em;
+  }
+  .formGroup .ctrl small {
+    font-family: var(--font-head); font-weight: 500; font-size: 11px; color: var(--mid-gray); letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .preview {
+    margin-top: 18px; padding: 16px; border-radius: 16px;
+    background: var(--green-soft); border: 1px solid #c8d4b6;
+  }
+  .preview .lbl { font-family: var(--font-head); font-weight: 500; font-size: 11px; color: #3e4a31; letter-spacing: 0.16em; text-transform: uppercase; }
+  .preview .val { font-family: var(--font-head); font-weight: 600; font-size: 18px; color: #3e4a31; margin-top: 6px; display: flex; align-items: center; gap: 8px; }
+  .preview .val svg { width: 16px; height: 16px; }
+  .preview p { font-family: var(--font-body); font-size: 12px; color: #4d5a3c; margin-top: 6px; }
+
+  .gridChips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill {
+    padding: 8px 12px;
+    border-radius: 100px;
+    background: #fff; border: 1px solid var(--light-gray);
+    font-family: var(--font-head); font-weight: 500; font-size: 12px; color: var(--dark);
+    cursor: pointer;
+  }
+  .pill.active { background: var(--dark); color: var(--light); border-color: var(--dark); }
+
+  /* ====== SCREEN: Reagentes ====== */
+  .reagentCard {
+    background: #fff; border: 1px solid var(--light-gray);
+    border-radius: 18px; padding: 16px;
+    margin-bottom: 12px;
+  }
+  .reagentTop { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .reagentTop h4 { font-family: var(--font-head); font-weight: 600; font-size: 14px; color: var(--dark); letter-spacing: -0.01em; }
+  .reagentTop small { font-family: var(--font-body); font-size: 11px; color: #5a5953; }
+  .progress {
+    margin-top: 14px; height: 6px; background: var(--light-gray); border-radius: 100px; overflow: hidden;
+  }
+  .progress span { display: block; height: 100%; border-radius: 100px; }
+  .reagentMeta {
+    display: flex; justify-content: space-between; margin-top: 8px;
+    font-family: var(--font-head); font-weight: 500; font-size: 11px; color: #5a5953;
+  }
+  .reagentMeta b { font-family: var(--font-head); color: var(--dark); }
+
+  .filterRow { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 12px; }
+  .filterRow::-webkit-scrollbar { display: none; }
+
+  /* ====== SCREEN: Relatório Levey-Jennings ====== */
+  .lj {
+    background: #fff; border: 1px solid var(--light-gray); border-radius: 20px;
+    padding: 16px; margin-top: 10px;
+  }
+  .ljHd { display: flex; justify-content: space-between; align-items: baseline; }
+  .ljHd h3 { font-family: var(--font-head); font-weight: 600; font-size: 14px; color: var(--dark); }
+  .ljHd small { font-family: var(--font-head); font-weight: 500; font-size: 10px; color: var(--mid-gray); letter-spacing: 0.12em; text-transform: uppercase; }
+  .chartArea {
+    margin-top: 14px;
+    height: 170px; position: relative;
+  }
+  .chartGrid {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(to right, transparent 0 calc(100%/12 - 1px), rgba(20,20,19,0.06) calc(100%/12 - 1px) calc(100%/12)),
+      repeating-linear-gradient(to bottom, transparent 0 calc(100%/6 - 1px), rgba(20,20,19,0.06) calc(100%/6 - 1px) calc(100%/6));
+  }
+  .ljLines {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .ljLine {
+    position: relative; height: 1px;
+    font-family: var(--font-head); font-weight: 500; font-size: 9px; color: var(--mid-gray);
+  }
+  .ljLine span {
+    position: absolute; right: 0; top: -7px;
+    background: var(--light); padding: 0 4px;
+  }
+  .ljLine.mean { background: var(--orange); height: 1.2px; }
+  .ljLine.sd2 { background: rgba(192,89,74,0.55); border-top: 1px dashed rgba(192,89,74,0.8); height: 0; }
+  .ljLine.sd1 { background: rgba(120,140,93,0.5); border-top: 1px dashed rgba(120,140,93,0.7); height: 0; }
+  .legend {
+    display: flex; justify-content: space-around; margin-top: 12px;
+    font-family: var(--font-head); font-weight: 500; font-size: 10px; color: #5a5953;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 4px; }
+  .legend i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+
+  .reportRow {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px;
+    background: #fff; border: 1px solid var(--light-gray);
+    border-radius: 14px; margin-top: 10px;
+  }
+  .reportRow .ic {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: grid; place-items: center;
+  }
+  .reportRow.pdf .ic { background: var(--red-soft); color: #6e261c; }
+  .reportRow.csv .ic { background: var(--green-soft); color: #3e4a31; }
+  .reportRow .meta { flex: 1; }
+  .reportRow .meta h5 { font-family: var(--font-head); font-weight: 600; font-size: 13px; color: var(--dark); }
+  .reportRow .meta small { font-family: var(--font-body); font-size: 11px; color: #5a5953; }
+  .reportRow .dl {
+    width: 32px; height: 32px; border-radius: 10px;
+    display: grid; place-items: center;
+    background: var(--light-gray); color: var(--dark);
+    border: none;
+  }
+
+  /* ===== Footer note ===== */
+  .footerNote {
+    margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--light-gray);
+    display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+    font-family: var(--font-body); font-size: 13px; color: #5a5953;
+  }
+  .footerNote h4 {
+    font-family: var(--font-head); font-weight: 600; font-size: 14px; color: var(--dark); margin-bottom: 6px;
+  }
+  .footerCol { max-width: 36ch; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="pageHeader">
+    <span class="eyebrow">Mobile App · Design Concept</span>
+    <h1 class="pageTitle">Biodiagnóstico no padrão visual da Anthropic</h1>
+    <p class="pageDek">Estudo de redesenho mobile do sistema de Controle de Qualidade laboratorial aplicando o design system do Claude — paleta cream + accents (orange, blue, green), tipografia Poppins (titular) e Lora (corrente) e linguagem editorial pautada pelo conteúdo.</p>
+    <div class="meta">
+      <div>
+        <div>Tipografia</div>
+        <b>Poppins · Lora</b>
+      </div>
+      <div>
+        <div>Cores principais</div>
+        <div class="swatchRow">
+          <span class="swatch dark" title="#141413"></span>
+          <span class="swatch light" title="#faf9f5"></span>
+          <span class="swatch gray" title="#b0aea5"></span>
+          <span class="swatch orange" title="#d97757"></span>
+          <span class="swatch blue" title="#6a9bcc"></span>
+          <span class="swatch green" title="#788c5d"></span>
+        </div>
+      </div>
+      <div>
+        <div>Telas</div>
+        <b>6 fluxos principais</b>
+      </div>
+      <div>
+        <div>Plataforma alvo</div>
+        <b>iOS · Android · PWA</b>
+      </div>
+    </div>
+  </header>
+
+  <main class="grid">
+
+    <!-- ============ 1. LOGIN ============ -->
+    <div class="frameWrap">
+      <span class="frameLabel">01 · Onboarding</span>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="statusBar">
+            <span>9:41</span>
+            <div class="statusIcons">
+              <span class="signal"><i></i><i></i><i></i><i></i></span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+              <span class="battery"><span></span></span>
+            </div>
+          </div>
+          <div class="login">
+            <div>
+              <div class="loginBrand">
+                <div class="loginMark">B</div>
+                <div>
+                  <div class="brandName" style="font-size:18px;">Biodiagnóstico</div>
+                  <div class="brandSub">Quality Control · v2.0</div>
+                </div>
+              </div>
+              <div class="loginGreet">
+                <h1>Bem-vindo<br>de <em>volta</em>.</h1>
+                <p>Entre com sua conta corporativa para acessar o controle de qualidade laboratorial.</p>
+              </div>
+              <div class="loginForm">
+                <div class="field">
+                  <label>E-mail</label>
+                  <div class="input">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                    otavio@bioqc.com
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Senha</label>
+                  <div class="input focus">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    ••••••••••
+                  </div>
+                </div>
+                <div class="forgot">Esqueci minha senha</div>
+                <button class="btn primary" style="margin-top:10px;">
+                  Entrar
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="loginFooter">
+              Acesso restrito a equipe interna.<br>Suporte: <b>ti@bioqc.com</b>
+            </div>
+          </div>
+        </div>
+        <div class="homeIndicator"></div>
+      </div>
+      <div class="frameTitle">Login</div>
+      <div class="frameDek">Tela de boas-vindas com identidade Anthropic — gradiente sutil de orange/green sobre cream.</div>
+    </div>
+
+    <!-- ============ 2. DASHBOARD ============ -->
+    <div class="frameWrap">
+      <span class="frameLabel">02 · Visão geral</span>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="statusBar">
+            <span>9:41</span>
+            <div class="statusIcons">
+              <span class="signal"><i></i><i></i><i></i><i></i></span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+              <span class="battery"><span></span></span>
+            </div>
+          </div>
+          <div class="app">
+            <div class="appHeader">
+              <div class="brand">
+                <div class="brandMark">B</div>
+                <div>
+                  <div class="brandName">Olá, Otávio</div>
+                  <div class="brandSub">18 abr · sex</div>
+                </div>
+              </div>
+              <button class="iconBtn" aria-label="Notificações">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              </button>
+            </div>
+
+            <div class="scroll">
+              <div class="heroCard">
+                <div class="heroEyebrow">Taxa de aprovação · mês</div>
+                <div class="heroValue">94<em>%</em></div>
+                <div class="heroDek">Operação estável · 312 lançamentos</div>
+                <div class="heroBadge">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg>
+                  +2,4 vs. mês anterior
+                </div>
+              </div>
+
+              <div class="kpiGrid">
+                <div class="kpi a">
+                  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                  <div class="num">28</div>
+                  <div class="lbl">CQ hoje</div>
+                </div>
+                <div class="kpi b">
+                  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6v4l3 3v11H6V10l3-3z"/></svg></div>
+                  <div class="num">312</div>
+                  <div class="lbl">CQ no mês</div>
+                </div>
+                <div class="kpi c">
+                  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-5"/></svg></div>
+                  <div class="num">0,8%</div>
+                  <div class="lbl">CV médio</div>
+                </div>
+                <div class="kpi d">
+                  <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 16-9 5-9-5"/><path d="m21 12-9 5-9-5"/><path d="M3 8 12 3l9 5"/></svg></div>
+                  <div class="num">3</div>
+                  <div class="lbl">Alertas ativos</div>
+                </div>
+              </div>
+
+              <div class="sectionHd">
+                <h3 class="h2">Alertas ativos</h3>
+                <a>Ver todos</a>
+              </div>
+
+              <div class="alert amber">
+                <div class="ai">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 11h6"/><path d="M9 15h4"/></svg>
+                </div>
+                <div>
+                  <h4>2 lotes vencem em 30 dias</h4>
+                  <p>Glicose · CK-MB — revise estoque.</p>
+                </div>
+              </div>
+              <div class="alert red">
+                <div class="ai">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><circle cx="12" cy="17" r="1"/></svg>
+                </div>
+                <div>
+                  <h4>1 violação Westgard 1-3s</h4>
+                  <p>Bioquímica · Sódio nível 2.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="tabbar">
+              <button class="tab active">
+                <div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9 12 2l9 7v11a2 2 0 0 1-2 2h-4v-7H10v7H6a2 2 0 0 1-2-2z"/></svg></div>
+                Início
+              </button>
+              <button class="tab">
+                <div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3h6v4l3 3v11H6V10l3-3z"/></svg></div>
+                Áreas
+              </button>
+              <button class="tab">
+                <div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>
+                Registrar
+              </button>
+              <button class="tab">
+                <div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+                Relatórios
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="homeIndicator"></div>
+      </div>
+      <div class="frameTitle">Dashboard CQ</div>
+      <div class="frameDek">Hero card escuro com KPI principal, 4 indicadores e alertas hierarquizados por severidade.</div>
+    </div>
+
+    <!-- ============ 3. ÁREAS ============ -->
+    <div class="frameWrap">
+      <span class="frameLabel">03 · Navegação</span>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="statusBar">
+            <span>9:41</span>
+            <div class="statusIcons">
+              <span class="signal"><i></i><i></i><i></i><i></i></span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+              <span class="battery"><span></span></span>
+            </div>
+          </div>
+          <div class="app">
+            <div class="appHeader">
+              <div class="brand">
+                <div class="brandMark">B</div>
+                <div>
+                  <div class="brandName">Áreas</div>
+                  <div class="brandSub">6 setores ativos</div>
+                </div>
+              </div>
+              <button class="iconBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+            </div>
+
+            <div class="scroll">
+              <div class="greet">
+                <span class="small">Selecione</span>
+                <h1>Em qual <em>área</em> vamos trabalhar?</h1>
+              </div>
+
+              <div class="searchBar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input placeholder="Buscar exame, lote ou área…" />
+              </div>
+
+              <div class="areasGrid">
+                <div class="areaCard feature">
+                  <div>
+                    <div class="ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6v4l3 3v11H6V10l3-3z"/></svg></div>
+                    <h3 style="margin-top:14px;">Bioquímica</h3>
+                    <small>28 exames hoje · 94% aprovação</small>
+                  </div>
+                  <div class="areaMeta">
+                    <span class="dot" style="background:rgba(255,255,255,0.7)"></span>Atualizado há 12 min
+                  </div>
+                </div>
+
+                <div class="areaCard">
+                  <div>
+                    <div class="ai" style="background:var(--red-soft); color:#6e261c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></div>
+                    <h3 style="margin-top:12px;">Hematologia</h3>
+                  </div>
+                  <small>Próxima fase · CQ-09</small>
+                </div>
+                <div class="areaCard">
+                  <div>
+                    <div class="ai" style="background:var(--blue-soft); color:#2f5276"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+                    <h3 style="margin-top:12px;">Imunologia</h3>
+                  </div>
+                  <small>14 ensaios · 100% ok</small>
+                </div>
+                <div class="areaCard">
+                  <div>
+                    <div class="ai" style="background:var(--green-soft); color:#3e4a31"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 0-4 4v2a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4zM4 22h16M6 16h12"/></svg></div>
+                    <h3 style="margin-top:12px;">Parasitologia</h3>
+                  </div>
+                  <small>8 lâminas pendentes</small>
+                </div>
+                <div class="areaCard">
+                  <div>
+                    <div class="ai" style="background:var(--amber-soft); color:#6f4912"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M5 9h14M4 14h16M5 19h14"/></svg></div>
+                    <h3 style="margin-top:12px;">Microbiologia</h3>
+                  </div>
+                  <small>Cultura em andamento</small>
+                </div>
+                <div class="areaCard">
+                  <div>
+                    <div class="ai" style="background:var(--orange-soft); color:#7a3717"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2h8l-1 7H9zM6 22h12l-2-13H8z"/></svg></div>
+                    <h3 style="margin-top:12px;">Uroanálise</h3>
+                  </div>
+                  <small>Tira reagente · 22 amostras</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="tabbar">
+              <button class="tab"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9 12 2l9 7v11a2 2 0 0 1-2 2h-4v-7H10v7H6a2 2 0 0 1-2-2z"/></svg></div>Início</button>
+              <button class="tab active"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3h6v4l3 3v11H6V10l3-3z"/></svg></div>Áreas</button>
+              <button class="tab"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>Registrar</button>
+              <button class="tab"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>Relatórios</button>
+            </div>
+          </div>
+        </div>
+        <div class="homeIndicator"></div>
+      </div>
+      <div class="frameTitle">Áreas laboratoriais</div>
+      <div class="frameDek">Card destaque para a área ativa, demais em grid 2x. Cada área leva ao seu fluxo especializado.</div>
+    </div>
+
+    <!-- ============ 4. REGISTRO CQ ============ -->
+    <div class="frameWrap">
+      <span class="frameLabel">04 · Operação</span>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="statusBar">
+            <span>9:41</span>
+            <div class="statusIcons">
+              <span class="signal"><i></i><i></i><i></i><i></i></span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+              <span class="battery"><span></span></span>
+            </div>
+          </div>
+          <div class="app">
+            <div class="topBar">
+              <button class="backBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+              <div class="topTitle">Novo registro · Bioquímica</div>
+              <button class="iconBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
+            </div>
+
+            <div class="scroll" style="padding-top:0;">
+              <h1 class="h1">Lançar valor de CQ</h1>
+              <p class="lead">Selecione o exame, nível e digite a leitura. A regra de Westgard será aplicada automaticamente.</p>
+
+              <div class="formGroup">
+                <label>Exame</label>
+                <div class="ctrl">
+                  <span>Glicose</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+              </div>
+
+              <div class="formGroup">
+                <label>Nível de controle</label>
+                <div class="gridChips">
+                  <span class="pill">Nível 1</span>
+                  <span class="pill active">Nível 2</span>
+                  <span class="pill">Nível 3</span>
+                </div>
+              </div>
+
+              <div class="formGroup">
+                <label>Leitura (mg/dL)</label>
+                <div class="ctrl large">
+                  <div>
+                    <small>Valor medido</small>
+                    <div class="val" style="margin-top:4px;">112,4</div>
+                  </div>
+                  <div class="iconBtn" style="background:var(--orange); color:var(--light)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                  </div>
+                </div>
+              </div>
+
+              <div class="preview">
+                <div class="lbl">Avaliação automática · Westgard</div>
+                <div class="val">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m22 4-10 10-3-3"/></svg>
+                  Aprovado · dentro de ±2 SD
+                </div>
+                <p>Média 110,0 · DP 1,2 · CV 1,1% · z-score +2,0</p>
+              </div>
+
+              <div class="formGroup">
+                <label>Observações</label>
+                <div class="ctrl" style="min-height:62px; align-items:flex-start;">
+                  <span style="color:var(--mid-gray)">Adicionar nota opcional…</span>
+                </div>
+              </div>
+
+              <button class="btn primary" style="margin-top:18px;">
+                Salvar registro
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2zM17 21v-8H7v8M7 3v5h8"/></svg>
+              </button>
+              <button class="btn ghost" style="margin-top:8px;">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="homeIndicator"></div>
+      </div>
+      <div class="frameTitle">Registro CQ</div>
+      <div class="frameDek">Form vertical otimizado para uma mão. Westgard avaliado em tempo real com feedback visual claro.</div>
+    </div>
+
+    <!-- ============ 5. REAGENTES ============ -->
+    <div class="frameWrap">
+      <span class="frameLabel">05 · Estoque</span>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="statusBar">
+            <span>9:41</span>
+            <div class="statusIcons">
+              <span class="signal"><i></i><i></i><i></i><i></i></span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+              <span class="battery"><span></span></span>
+            </div>
+          </div>
+          <div class="app">
+            <div class="topBar">
+              <button class="backBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+              <div class="topTitle">Reagentes</div>
+              <button class="iconBtn" style="background:var(--orange); color:var(--light)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+
+            <div class="scroll" style="padding-top:0;">
+              <h1 class="h1">Estoque de reagentes</h1>
+              <p class="lead">38 lotes ativos · 2 vencendo em 30 dias</p>
+
+              <div class="filterRow">
+                <span class="pill active">Todos · 38</span>
+                <span class="pill">Críticos · 2</span>
+                <span class="pill">Em uso · 24</span>
+                <span class="pill">Em estoque · 12</span>
+              </div>
+
+              <div class="reagentCard">
+                <div class="reagentTop">
+                  <div>
+                    <h4>Glicose Liquiform</h4>
+                    <small>Labtest · Lote LBT-2410-G · 250 mL</small>
+                  </div>
+                  <span class="chip amber"><span class="dot amber"></span>Vence 12 dias</span>
+                </div>
+                <div class="progress"><span style="width:38%; background:var(--amber)"></span></div>
+                <div class="reagentMeta">
+                  <span>Restante <b>38%</b></span>
+                  <span>Validade <b>30 abr 2026</b></span>
+                </div>
+              </div>
+
+              <div class="reagentCard">
+                <div class="reagentTop">
+                  <div>
+                    <h4>Sódio ISE</h4>
+                    <small>Roche · Lote RC-509-Na · 500 mL</small>
+                  </div>
+                  <span class="chip green"><span class="dot green"></span>OK</span>
+                </div>
+                <div class="progress"><span style="width:82%; background:var(--green)"></span></div>
+                <div class="reagentMeta">
+                  <span>Restante <b>82%</b></span>
+                  <span>Validade <b>14 ago 2026</b></span>
+                </div>
+              </div>
+
+              <div class="reagentCard">
+                <div class="reagentTop">
+                  <div>
+                    <h4>CK-MB</h4>
+                    <small>Bioclin · Lote BC-2401-CK · 100 mL</small>
+                  </div>
+                  <span class="chip red"><span class="dot red"></span>Crítico</span>
+                </div>
+                <div class="progress"><span style="width:14%; background:var(--red)"></span></div>
+                <div class="reagentMeta">
+                  <span>Restante <b>14%</b></span>
+                  <span>Validade <b>28 abr 2026</b></span>
+                </div>
+              </div>
+
+              <div class="reagentCard">
+                <div class="reagentTop">
+                  <div>
+                    <h4>Colesterol Total</h4>
+                    <small>Labtest · Lote LBT-2412-CT · 250 mL</small>
+                  </div>
+                  <span class="chip blue"><span class="dot blue"></span>Em estoque</span>
+                </div>
+                <div class="progress"><span style="width:100%; background:var(--blue)"></span></div>
+                <div class="reagentMeta">
+                  <span>Restante <b>100%</b></span>
+                  <span>Validade <b>20 nov 2026</b></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tabbar">
+              <button class="tab"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9 12 2l9 7v11a2 2 0 0 1-2 2h-4v-7H10v7H6a2 2 0 0 1-2-2z"/></svg></div>Início</button>
+              <button class="tab"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3h6v4l3 3v11H6V10l3-3z"/></svg></div>Áreas</button>
+              <button class="tab"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>Registrar</button>
+              <button class="tab"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>Relatórios</button>
+            </div>
+          </div>
+        </div>
+        <div class="homeIndicator"></div>
+      </div>
+      <div class="frameTitle">Reagentes</div>
+      <div class="frameDek">Lista visual com barra de progresso colorida por status — verde (ok), âmbar (vence) e vermelho (crítico).</div>
+    </div>
+
+    <!-- ============ 6. RELATÓRIOS / LEVEY-JENNINGS ============ -->
+    <div class="frameWrap">
+      <span class="frameLabel">06 · Análise</span>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="statusBar">
+            <span>9:41</span>
+            <div class="statusIcons">
+              <span class="signal"><i></i><i></i><i></i><i></i></span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+              <span class="battery"><span></span></span>
+            </div>
+          </div>
+          <div class="app">
+            <div class="topBar">
+              <button class="backBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+              <div class="topTitle">Relatórios · Glicose Nv2</div>
+              <button class="iconBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+            </div>
+
+            <div class="scroll" style="padding-top:0;">
+              <h1 class="h1">Levey-Jennings</h1>
+              <p class="lead">30 últimos lançamentos · regras 1-3s, 2-2s, R-4s</p>
+
+              <div class="lj">
+                <div class="ljHd">
+                  <h3>Glicose · Nível 2</h3>
+                  <small>Abr · 2026</small>
+                </div>
+                <div style="display:flex; gap:8px; margin-top:8px; align-items:baseline;">
+                  <div style="font-family:var(--font-head); font-weight:700; font-size:32px; color:var(--dark); letter-spacing:-0.02em;">110,3</div>
+                  <span class="chip green"><span class="dot green"></span>+0,3 SD</span>
+                </div>
+                <div class="chartArea">
+                  <div class="chartGrid"></div>
+                  <div class="ljLines">
+                    <div class="ljLine sd2"><span>+2 SD</span></div>
+                    <div class="ljLine sd1"><span>+1 SD</span></div>
+                    <div class="ljLine mean"><span>X̄</span></div>
+                    <div class="ljLine sd1"><span>−1 SD</span></div>
+                    <div class="ljLine sd2"><span>−2 SD</span></div>
+                  </div>
+                  <!-- SVG line on top -->
+                  <svg viewBox="0 0 300 170" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%;">
+                    <path d="M5,90 L25,72 L45,95 L65,80 L85,100 L105,68 L125,82 L145,98 L165,110 L185,76 L205,88 L225,70 L245,86 L265,92 L285,78"
+                      fill="none" stroke="#141413" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <g fill="#d97757" stroke="#141413" stroke-width="1.2">
+                      <circle cx="5" cy="90" r="3"/>
+                      <circle cx="25" cy="72" r="3"/>
+                      <circle cx="45" cy="95" r="3"/>
+                      <circle cx="65" cy="80" r="3"/>
+                      <circle cx="85" cy="100" r="3"/>
+                      <circle cx="105" cy="68" r="3"/>
+                      <circle cx="125" cy="82" r="3"/>
+                      <circle cx="145" cy="98" r="3"/>
+                      <circle cx="165" cy="110" r="3" fill="#c0594a"/>
+                      <circle cx="185" cy="76" r="3"/>
+                      <circle cx="205" cy="88" r="3"/>
+                      <circle cx="225" cy="70" r="3"/>
+                      <circle cx="245" cy="86" r="3"/>
+                      <circle cx="265" cy="92" r="3"/>
+                      <circle cx="285" cy="78" r="3" fill="#788c5d"/>
+                    </g>
+                  </svg>
+                </div>
+                <div class="legend">
+                  <span><i style="background:var(--orange)"></i>Leitura</span>
+                  <span><i style="background:var(--red)"></i>Violação</span>
+                  <span><i style="background:var(--green)"></i>Atual</span>
+                </div>
+              </div>
+
+              <div class="sectionHd">
+                <h3 class="h2">Exportar</h3>
+              </div>
+
+              <div class="reportRow pdf">
+                <div class="ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                </div>
+                <div class="meta">
+                  <h5>Relatório mensal · PDF</h5>
+                  <small>Inclui gráficos LJ + tabela completa</small>
+                </div>
+                <button class="dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg></button>
+              </div>
+              <div class="reportRow csv">
+                <div class="ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                </div>
+                <div class="meta">
+                  <h5>Dados brutos · CSV</h5>
+                  <small>Exportar 30 últimos lançamentos</small>
+                </div>
+                <button class="dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg></button>
+              </div>
+
+              <button class="btn dark" style="margin-top:18px;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51 8.59 10.49"/></svg>
+                Compartilhar
+              </button>
+            </div>
+
+            <div class="tabbar">
+              <button class="tab"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9 12 2l9 7v11a2 2 0 0 1-2 2h-4v-7H10v7H6a2 2 0 0 1-2-2z"/></svg></div>Início</button>
+              <button class="tab"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3h6v4l3 3v11H6V10l3-3z"/></svg></div>Áreas</button>
+              <button class="tab"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>Registrar</button>
+              <button class="tab active"><div class="tabIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>Relatórios</button>
+            </div>
+          </div>
+        </div>
+        <div class="homeIndicator"></div>
+      </div>
+      <div class="frameTitle">Relatórios e Levey-Jennings</div>
+      <div class="frameDek">Gráfico LJ otimizado para tela pequena, com badges de violação e exportação rápida em PDF/CSV.</div>
+    </div>
+
+  </main>
+
+  <footer class="footerNote">
+    <div class="footerCol">
+      <h4>Princípios aplicados</h4>
+      Editorial primeiro · cream + accents quentes · espaçamento generoso · tipografia Poppins/Lora · iconografia stroke 1.8 · feedback de cor pautado por severidade clínica.
+    </div>
+    <div class="footerCol">
+      <h4>Sistema de cores</h4>
+      <b>Verde (#788c5d)</b> = aprovado · <b>Âmbar (#c69141)</b> = atenção · <b>Vermelho (#c0594a)</b> = violação · <b>Orange (#d97757)</b> = ação primária · <b>Azul (#6a9bcc)</b> = informativo.
+    </div>
+    <div class="footerCol">
+      <h4>Próximos passos sugeridos</h4>
+      Validar com o time clínico · prototipar em Figma · gerar variantes dark mode · medir tap targets ≥44pt · adicionar Dynamic Type para acessibilidade.
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
