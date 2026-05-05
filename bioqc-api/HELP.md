@@ -1,4 +1,4 @@
-# Biodiagnóstico API
+# BioQC API
 
 ## Execução local
 

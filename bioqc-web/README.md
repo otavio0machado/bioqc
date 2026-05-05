@@ -1,4 +1,4 @@
-# Biodiagnóstico Web
+# BioQC Web
 
 Frontend em React + Vite para o sistema de controle de qualidade.
 

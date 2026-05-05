@@ -248,7 +248,7 @@ public class GeminiAiService {
     }
 
     public String buildQcContext(List<QcRecord> records) {
-        StringBuilder context = new StringBuilder("Dados de Controle de Qualidade do Laboratório Biodiagnóstico:\n\n");
+        StringBuilder context = new StringBuilder("Dados de Controle de Qualidade do Laboratório de Demonstração BioQC:\n\n");
         for (QcRecord record : records) {
             context.append(String.format(
                 "Data: %s | Exame: %s | Nível: %s | Valor: %.2f | Alvo: %.2f | SD: %.2f | CV: %.2f%% | Status: %s%n",

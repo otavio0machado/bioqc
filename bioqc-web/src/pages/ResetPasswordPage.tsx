@@ -7,7 +7,7 @@ import { Button, Card, Input, useToast } from '../components/ui'
 import { useAuth } from '../hooks/useAuth'
 import { type ResetPasswordFormValues, resetPasswordSchema } from '../lib/authSchemas'
 import { authService } from '../services/authService'
-import logoBio from '../assets/logobio.png'
+import { BioQCLogo } from '../components/common/BioQCLogo'
 
 export function ResetPasswordPage() {
   const { isAuthenticated } = useAuth()
@@ -57,7 +57,7 @@ export function ResetPasswordPage() {
           <div className="relative flex h-full w-full items-center">
             <div className="max-w-2xl space-y-8">
               <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium backdrop-blur-md">
-                <img src={logoBio} alt="Biodiagnóstico" className="h-6 w-6 rounded-full bg-white/90 p-0.5" />
+                <BioQCLogo className="h-6 w-6 rounded-full bg-white/90 p-0.5" />
                 Recuperação de Acesso
               </div>
               <div className="space-y-5">
@@ -80,8 +80,8 @@ export function ResetPasswordPage() {
         <section className="flex items-center justify-center px-6 py-12 sm:px-10">
           <div className="w-full max-w-md space-y-8">
             <div className="space-y-3">
-              <img src={logoBio} alt="Biodiagnóstico" className="h-16 w-16 rounded-2xl shadow-sm" />
-              <div className="text-sm font-semibold uppercase tracking-[0.18em] text-green-800">Biodiagnóstico</div>
+              <BioQCLogo className="h-16 w-16 rounded-2xl shadow-sm" />
+              <div className="text-sm font-semibold uppercase tracking-[0.18em] text-green-800">BioQC</div>
               <h2 className="text-3xl font-bold text-neutral-900">Redefinir senha</h2>
               <p className="text-neutral-500">Crie uma nova senha para continuar usando a plataforma.</p>
             </div>

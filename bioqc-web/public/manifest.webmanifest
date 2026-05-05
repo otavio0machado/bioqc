@@ -1,25 +1,25 @@
 {
-  "name": "Biodiagnóstico 4.0",
-  "short_name": "Biodiagnóstico",
-  "description": "Sistema de Controle de Qualidade laboratorial — CQ, reagentes, manutenção e análises assistidas.",
+  "name": "BioQC",
+  "short_name": "BioQC",
+  "description": "Lab Quality Control platform — sanitized portfolio version of a system in production at a clinical laboratory.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#166534",
+  "theme_color": "#10b981",
   "lang": "pt-BR",
   "icons": [
     {
-      "src": "/pwa-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "/pwa-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
   ]
 }

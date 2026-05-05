@@ -138,7 +138,7 @@ public class PasswordResetService {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(fromEmail);
             message.setTo(user.getEmail());
-            message.setSubject("Recuperação de senha - Biodiagnóstico 4.0");
+            message.setSubject("Recuperação de senha - BioQC");
             message.setText("""
                 Olá,
 
