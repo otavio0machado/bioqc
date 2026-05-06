@@ -1,293 +1,810 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR" data-lang="pt">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="BioQC — production-grade Quality Control platform for clinical laboratories. Java/Spring Boot + React/TypeScript. ISO 15189-aware. Built and deployed by Otavio Machado." />
-  <meta name="author" content="Otavio Machado" />
-  <meta property="og:title" content="BioQC — Lab Quality Control Platform" />
-  <meta property="og:description" content="Westgard rules, signed PDF reports, full audit trail. Java/Spring Boot + React. Live demo + open source." />
+  <meta name="description" content="BioQC — plataforma de Controle de Qualidade laboratorial em produção. Java/Spring Boot, React, Postgres. Versão sanitizada do sistema rodando em laboratório clínico brasileiro." />
+  <meta name="author" content="Otávio Machado" />
+  <meta property="og:title" content="BioQC — Controle de Qualidade, em produção" />
+  <meta property="og:description" content="Sistema de CQ laboratorial em Java/Spring + React, em produção desde 2026. Versão sanitizada com autorização do cliente." />
   <meta property="og:type" content="website" />
-  <title>BioQC — Lab Quality Control Platform · Otavio Machado</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>BioQC · edição 01</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
   <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
-    code, pre { font-family: 'JetBrains Mono', monospace; }
-    .gradient-text {
-      background: linear-gradient(135deg, #06b6d4 0%, #10b981 50%, #6366f1 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+    :root {
+      --bg:        #0c0a09;
+      --ink:       #fafaf9;
+      --mute:      #a8a29e;
+      --soft:      #57534e;
+      --rule:      #292524;
+      --paper:     #1c1917;
+      --amber:     #d4a017;
+      --amber-dim: #a37811;
     }
-    .gradient-bg {
-      background: radial-gradient(ellipse at top, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
-                  radial-gradient(ellipse at bottom, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      font-feature-settings: 'ss01', 'cv11';
+      -webkit-font-smoothing: antialiased;
     }
-    .card-hover {
-      transition: all 0.2s ease;
+
+    .serif {
+      font-family: 'Fraunces', 'Times New Roman', serif;
+      font-optical-sizing: auto;
+      font-feature-settings: 'ss01', 'liga', 'kern';
     }
-    .card-hover:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 40px -10px rgba(6, 182, 212, 0.3);
+
+    .mono {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-feature-settings: 'zero', 'ss02';
+    }
+
+    /* ---- LANG TOGGLE ---- */
+    [data-lang="pt"] .en { display: none; }
+    [data-lang="en"] .pt { display: none; }
+
+    /* ---- LAYOUT ---- */
+    .frame {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    @media (max-width: 720px) {
+      .frame { padding: 0 22px; }
+      body { font-size: 16px; }
+    }
+
+    /* ---- NAV ---- */
+    nav.top {
+      border-bottom: 1px solid var(--rule);
+      padding: 18px 0;
+      font-size: 13px;
+    }
+    nav.top .frame {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    nav.top .mark {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    nav.top .mark sup {
+      color: var(--amber);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 400;
+      margin-left: 6px;
+      vertical-align: super;
+    }
+    nav.top .right {
+      display: flex;
+      gap: 22px;
+      color: var(--mute);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+    nav.top a, nav.top button {
+      color: var(--mute);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      padding: 0;
+      transition: color 220ms ease;
+    }
+    nav.top a:hover, nav.top button:hover { color: var(--ink); }
+    nav.top button.lang-btn {
+      letter-spacing: 0.05em;
+    }
+    nav.top button.lang-btn .active {
+      color: var(--ink);
+    }
+    nav.top button.lang-btn .sep {
+      margin: 0 4px;
+      color: var(--soft);
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      padding: 96px 0 80px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: 80px;
+      align-items: end;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 350;
+      font-variation-settings: 'opsz' 144, 'SOFT' 30;
+      font-size: clamp(54px, 9vw, 124px);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      margin: 0;
+      color: var(--ink);
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--amber);
+      font-weight: 350;
+    }
+    .hero h1 .comma {
+      color: var(--amber);
+      font-style: normal;
+    }
+    .hero .lead {
+      color: var(--mute);
+      font-size: 17px;
+      line-height: 1.65;
+      max-width: 380px;
+    }
+    .hero .lead strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .hero .lead a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-color: var(--soft);
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: text-decoration-color 220ms ease;
+    }
+    .hero .lead a:hover {
+      text-decoration-color: var(--amber);
+    }
+    .hero .meta {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--soft);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hero .meta span b {
+      color: var(--mute);
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @media (max-width: 900px) {
+      .hero { padding: 64px 0 56px; }
+      .hero .grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .hero .lead { max-width: 100%; }
+    }
+
+    /* ---- SECTION ---- */
+    section.body {
+      padding: 96px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    section.body .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr);
+      gap: 80px;
+    }
+    section.body h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1.15;
+      margin: 0;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      position: sticky;
+      top: 32px;
+      align-self: start;
+    }
+    section.body h2 .num {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--amber);
+      margin-bottom: 12px;
+      letter-spacing: 0.08em;
+    }
+    section.body p {
+      margin: 0 0 1.2em;
+      color: var(--ink);
+      max-width: 64ch;
+    }
+    section.body p:last-child { margin-bottom: 0; }
+    section.body p.lead-text {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      line-height: 1.45;
+      font-weight: 350;
+      color: var(--ink);
+    }
+    section.body strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+    section.body em.tech {
+      font-style: normal;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      color: var(--amber);
+      background: rgba(212, 160, 23, 0.08);
+      padding: 0.5px 6px;
+      border-radius: 3px;
+    }
+    section.body sup.fn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7em;
+      color: var(--amber);
+      margin-left: 1px;
+      vertical-align: super;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      section.body { padding: 64px 0; }
+      section.body .grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      section.body h2 { position: static; }
+    }
+
+    /* ---- PULL QUOTE ---- */
+    blockquote.pull {
+      margin: 48px 0;
+      padding: 0 0 0 24px;
+      border-left: 2px solid var(--amber);
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 26px;
+      line-height: 1.35;
+      font-weight: 350;
+      color: var(--ink);
+      max-width: 56ch;
+    }
+    blockquote.pull cite {
+      display: block;
+      margin-top: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-style: normal;
+      font-size: 11px;
+      color: var(--mute);
+      letter-spacing: 0.04em;
+    }
+
+    /* ---- STACK BLOCK ---- */
+    .stack-list {
+      margin-top: 32px;
+      padding: 24px 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.85;
+      color: var(--mute);
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 4px 24px;
+    }
+    .stack-list dt {
+      color: var(--soft);
+      letter-spacing: 0.02em;
+    }
+    .stack-list dd {
+      margin: 0;
+      color: var(--ink);
+    }
+    .stack-list dd .dim { color: var(--mute); }
+
+    /* ---- ACCESS BLOCK ---- */
+    .access {
+      margin-top: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--mute);
+    }
+    .access .row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 0 24px;
+    }
+    .access .row b {
+      color: var(--soft);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .access .row span {
+      color: var(--ink);
+      font-weight: 400;
+    }
+    .access .row a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-color: var(--soft);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 220ms ease;
+    }
+    .access .row a:hover { text-decoration-color: var(--amber); }
+    .access .creds {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--rule);
+    }
+
+    /* ---- AUTHOR ---- */
+    .signoff p {
+      max-width: 56ch;
+    }
+    .signoff .name {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 28px;
+      color: var(--ink);
+      margin-top: 32px;
+      margin-bottom: 0;
+      font-weight: 350;
+    }
+    .signoff .where {
+      margin-top: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--soft);
+      letter-spacing: 0.05em;
+    }
+
+    /* ---- COLOPHON ---- */
+    footer.colophon {
+      padding: 56px 0 80px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.9;
+      color: var(--soft);
+    }
+    footer.colophon .frame {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+    footer.colophon p { margin: 0 0 6px; }
+    footer.colophon a {
+      color: var(--mute);
+      text-decoration: none;
+      transition: color 220ms ease;
+    }
+    footer.colophon a:hover { color: var(--ink); }
+    footer.colophon .right { text-align: right; }
+    footer.colophon .edition {
+      color: var(--amber);
+    }
+
+    @media (max-width: 720px) {
+      footer.colophon .frame {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      footer.colophon .right { text-align: left; }
+    }
+
+    /* ---- FOOTNOTES ---- */
+    .footnotes {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      line-height: 1.7;
+      color: var(--mute);
+    }
+    .footnotes ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: fn;
+    }
+    .footnotes li {
+      counter-increment: fn;
+      margin-bottom: 10px;
+      padding-left: 22px;
+      position: relative;
+    }
+    .footnotes li::before {
+      content: counter(fn);
+      position: absolute;
+      left: 0;
+      color: var(--amber);
+    }
+
+    /* ---- LINKS GENERIC ---- */
+    a.body-link {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-color: var(--soft);
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      transition: text-decoration-color 220ms ease;
+    }
+    a.body-link:hover { text-decoration-color: var(--amber); }
+
+    /* ---- SELECTION ---- */
+    ::selection {
+      background: var(--amber);
+      color: var(--bg);
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased">
 
-  <!-- Nav -->
-  <nav class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/70 border-b border-slate-800">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2 font-bold text-lg">
-        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center text-slate-950 font-extrabold">B</span>
-        <span>BioQC</span>
-      </a>
-      <div class="hidden md:flex items-center gap-8 text-sm text-slate-300">
-        <a href="#features" class="hover:text-cyan-400 transition">Features</a>
-        <a href="#stack" class="hover:text-cyan-400 transition">Stack</a>
-        <a href="#case-study" class="hover:text-cyan-400 transition">Case Study</a>
-        <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
-        <a href="https://github.com/otavio0machado/bioqc" class="px-4 py-1.5 border border-slate-700 rounded-lg hover:border-cyan-400 transition">GitHub</a>
+<body>
+
+  <nav class="top">
+    <div class="frame">
+      <div class="mark">BioQC<sup>01</sup></div>
+      <div class="right">
+        <a href="#sistema" class="pt">sistema</a>
+        <a href="#sistema" class="en">system</a>
+        <a href="#numeros" class="pt">números</a>
+        <a href="#numeros" class="en">numbers</a>
+        <a href="#experimentar" class="pt">experimentar</a>
+        <a href="#experimentar" class="en">try it</a>
+        <a href="https://github.com/otavio0machado/bioqc">source</a>
+        <button class="lang-btn" id="lang-toggle" aria-label="alternar idioma">
+          <span class="active" id="lang-pt">PT</span><span class="sep">/</span><span id="lang-en">EN</span>
+        </button>
       </div>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="gradient-bg py-24 md:py-32">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <span class="inline-block px-4 py-1.5 rounded-full bg-emerald-400/10 border border-emerald-400/30 text-emerald-300 text-xs font-medium tracking-wider uppercase mb-6">
-        ⬢ In Production at a Real Clinical Lab
-      </span>
-      <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-        <span class="gradient-text">Quality Control</span><br />
-        <span class="text-slate-100">for Clinical Labs.</span>
-      </h1>
-      <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
-        Westgard multirules, signed PDF reports, ISO 15189 traceability.<br />
-        <span class="text-slate-500">Java/Spring Boot · React/TypeScript · Postgres · 406 tests passing.</span>
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="https://bioqc-demo.vercel.app" class="px-8 py-3.5 rounded-lg bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-semibold transition shadow-lg shadow-cyan-500/20">
-          → Try the Live Demo
-        </a>
-        <a href="https://github.com/otavio0machado/bioqc" class="px-8 py-3.5 rounded-lg border border-slate-700 hover:border-cyan-400 text-slate-200 font-medium transition">
-          View Source on GitHub
-        </a>
-      </div>
-      <div class="mt-12 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-slate-900/60 border border-slate-800 text-sm text-slate-400">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Demo credentials: <code class="text-cyan-300">admin@demo.bioqc.dev</code> / <code class="text-cyan-300">Demo123!</code>
+  <!-- ============= HERO ============= -->
+  <section class="hero">
+    <div class="frame">
+      <div class="grid">
+        <h1 class="pt">
+          Controle de qualidade<span class="comma">,</span><br />
+          <em>em produção</em>.
+        </h1>
+        <h1 class="en">
+          Quality control<span class="comma">,</span><br />
+          <em>in production</em>.
+        </h1>
+
+        <div>
+          <p class="lead pt">
+            BioQC é a versão sanitizada de um sistema de Controle de Qualidade que substituiu, depois de paridade controlada, a operação Python de um <strong>laboratório clínico brasileiro</strong>. Java/Spring Boot, React, Postgres. Em produção desde fevereiro de 2026 — com autorização do cliente para mostrar o código.
+          </p>
+          <p class="lead en">
+            BioQC is the sanitized version of a quality control system that replaced, after parity testing, the Python operation of a <strong>Brazilian clinical lab</strong>. Java/Spring Boot, React, Postgres. In production since February 2026 — with client authorization to show the source.
+          </p>
+
+          <div class="meta">
+            <span><b>demo&nbsp;&nbsp;&nbsp;&nbsp;</b><a href="https://bioqc.vercel.app" class="body-link">bioqc.vercel.app</a></span>
+            <span><b>fonte&nbsp;&nbsp;&nbsp;</b><a href="https://github.com/otavio0machado/bioqc" class="body-link">github.com/otavio0machado/bioqc</a></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Metrics -->
-  <section class="py-16 border-y border-slate-800 bg-slate-900/30">
-    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+  <!-- ============= SECTION: COMO COMEÇOU ============= -->
+  <section class="body" id="como-comecou">
+    <div class="frame">
+      <div class="grid">
+        <h2>
+          <span class="num">§ 01</span>
+          <span class="pt">Como começou</span>
+          <span class="en">How it started</span>
+        </h2>
+
+        <div>
+          <div class="pt">
+            <p class="lead-text">
+              O laboratório rodava o controle de qualidade diário num app Python desktop, herdado de anos.
+            </p>
+            <p>
+              Uma analista por vez registrava medições em SQLite que viajava entre estações por pendrive. Relatórios saíam em Word — qualquer um podia editar depois de assinar. Rastreabilidade de reagentes vivia em planilha. Regras Westgard eram aplicadas por leitura humana de impressões.
+            </p>
+            <p>
+              A operação funcionava. A auditoria ISO 15189, prevista para três meses adiante, não funcionaria.
+            </p>
+            <p>
+              Reescrevi o sistema em <em class="tech">Java/Spring</em> com frontend em <em class="tech">React</em>. A migração foi feita em <strong>paridade controlada</strong>: código novo e velho rodando lado a lado, contra o mesmo input, por uma a duas semanas em cada módulo. Diff diário sinalizava qualquer divergência. Cutover de escrita num sábado, com o sistema antigo mantido em modo leitura. Zero downtime para a analista que entrou na segunda.
+            </p>
+
+            <blockquote class="pull">
+              Boring tech, deployed, with tests, beats novel tech in a slide deck.
+              <cite>— princípio de trabalho</cite>
+            </blockquote>
+          </div>
+
+          <div class="en">
+            <p class="lead-text">
+              The lab ran daily quality control on a Python desktop app, inherited over years.
+            </p>
+            <p>
+              One analyst at a time recorded measurements into SQLite that traveled between stations by USB stick. Reports went out as Word docs — anyone could edit them after signing. Reagent traceability lived in a spreadsheet. Westgard rules were applied by human reading of printouts.
+            </p>
+            <p>
+              The operation worked. The ISO 15189 audit, three months out, would not.
+            </p>
+            <p>
+              I rewrote the system in <em class="tech">Java/Spring</em> with a <em class="tech">React</em> frontend. Migration ran in <strong>controlled parity</strong>: new and old code running side by side, against the same input, for one to two weeks per module. A daily diff flagged any divergence. Write-side cutover on a Saturday, old system kept read-only. Zero downtime for the analyst who walked in on Monday.
+            </p>
+
+            <blockquote class="pull">
+              Boring tech, deployed, with tests, beats novel tech in a slide deck.
+              <cite>— working principle</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SECTION: O SISTEMA ============= -->
+  <section class="body" id="sistema">
+    <div class="frame">
+      <div class="grid">
+        <h2>
+          <span class="num">§ 02</span>
+          <span class="pt">O sistema</span>
+          <span class="en">The system</span>
+        </h2>
+
+        <div>
+          <div class="pt">
+            <p>
+              Quatro engrenagens carregam o produto.
+            </p>
+            <p>
+              <strong>Westgard como função pura sobre janela histórica.</strong> As regras (<em class="tech">1-2s, 1-3s, 2-2s, R-4s, 4-1s, 10x</em>) avaliam cada nova medição contra a história recente da combinação <em class="tech">analito × equipamento × lote × nível</em>. Saída persistida em <em class="tech">WestgardViolation</em>, indexada por severidade — dashboards e relatórios consultam sem recomputar.
+            </p>
+            <p>
+              <strong>Cadeia de assinaturas em PDF, hash-encadeada.</strong> Cada relatório assinado guarda <em class="tech">sha256(bytes_do_pdf)</em> e o hash do anterior. Alterar qualquer relatório passado quebra todos os hashes seguintes. Um QR code no impresso aponta para <em class="tech">/verify/{hash}</em>, página pública que confirma autenticidade na hora.
+            </p>
+            <p>
+              <strong>Ciclo de vida do reagente como máquina de estados explícita.</strong> <em class="tech">EM_ESPERA → ABERTO → EM_USO → FINAL_DE_USO → INATIVO</em>, com transições mediadas em service e <em class="tech">eventDate</em> separado de <em class="tech">createdAt</em>. Um lote aberto na segunda registrado quarta tem dois timestamps que importam para a auditoria.
+            </p>
+            <p>
+              <strong>Trilha de auditoria primária, não opcional.</strong> Toda mutação persiste com ator, timestamp e diff antes/depois. JWT em cookie HttpOnly cross-origin com rotação de refresh; RBAC granular por permission, não por role.
+            </p>
+          </div>
+
+          <div class="en">
+            <p>
+              Four mechanisms carry the product.
+            </p>
+            <p>
+              <strong>Westgard as a pure function over the historical window.</strong> The rules (<em class="tech">1-2s, 1-3s, 2-2s, R-4s, 4-1s, 10x</em>) evaluate each new measurement against the recent history for the combination <em class="tech">analyte × instrument × lot × level</em>. Output persisted in <em class="tech">WestgardViolation</em>, indexed by severity — dashboards and reports read without recomputing.
+            </p>
+            <p>
+              <strong>Hash-chained signature log on PDFs.</strong> Each signed report stores <em class="tech">sha256(pdf_bytes)</em> and the previous hash. Tampering with any past report breaks every downstream hash. A QR code on the printout points to <em class="tech">/verify/{hash}</em>, a public page that confirms authenticity on the spot.
+            </p>
+            <p>
+              <strong>Reagent lifecycle as an explicit state machine.</strong> <em class="tech">EM_ESPERA → ABERTO → EM_USO → FINAL_DE_USO → INATIVO</em>, transitions mediated in the service layer and <em class="tech">eventDate</em> kept separate from <em class="tech">createdAt</em>. A lot opened on Monday but recorded on Wednesday has two timestamps that matter for audit.
+            </p>
+            <p>
+              <strong>Audit trail as a primary surface, not an option.</strong> Every mutation persisted with actor, timestamp, and before/after diff. JWT in cross-origin HttpOnly cookie with refresh rotation; RBAC granular by permission, not by role.
+            </p>
+          </div>
+
+          <dl class="stack-list">
+            <dt>backend</dt>
+            <dd>Java 21 · Spring Boot 3.3 · Spring Security · JPA · Flyway</dd>
+            <dt>frontend</dt>
+            <dd>React 18 · TypeScript · Vite · TanStack Query · Tailwind</dd>
+            <dt>data</dt>
+            <dd>PostgreSQL <span class="dim">on Supabase</span></dd>
+            <dt>ops</dt>
+            <dd>Docker · Railway · Vercel · Prometheus · logstash-logback</dd>
+            <dt>pdf</dt>
+            <dd>OpenPDF · JFreeChart · ZXing</dd>
+            <dt>ai</dt>
+            <dd>Gemini <span class="dim">(commentary, opcional)</span></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SECTION: NÚMEROS ============= -->
+  <section class="body" id="numeros">
+    <div class="frame">
+      <div class="grid">
+        <h2>
+          <span class="num">§ 03</span>
+          <span class="pt">Números</span>
+          <span class="en">Numbers</span>
+        </h2>
+
+        <div>
+          <div class="pt">
+            <p class="lead-text">
+              Em produção desde fevereiro de 2026.
+            </p>
+            <p>
+              <strong>15 migrations Flyway</strong> shipped, nenhum rollback. <strong>282 arquivos Java</strong>, <strong>116 TypeScript</strong>. <strong>406 casos de teste backend</strong> verdes — cobrindo cada regra Westgard, integridade da cadeia de assinaturas, transições do ciclo de reagente, surfaces de auth e CORS. Suite frontend em Vitest + Testing Library.
+            </p>
+            <p>
+              Operação multi-analista em paralelo desde o cutover. Relatórios mensais aceitos por auditores sem retorno. Rastreabilidade lote-paciente respondida em segundos pela aplicação — não pelo arquivo do laboratório.
+            </p>
+          </div>
+
+          <div class="en">
+            <p class="lead-text">
+              In production since February 2026.
+            </p>
+            <p>
+              <strong>15 Flyway migrations</strong> shipped, zero rollbacks. <strong>282 Java files</strong>, <strong>116 TypeScript</strong>. <strong>406 backend test cases</strong> green — covering every Westgard rule, signature chain integrity, reagent lifecycle transitions, auth and CORS surfaces. Frontend suite in Vitest + Testing Library.
+            </p>
+            <p>
+              Multi-analyst concurrent operation since cutover. Monthly reports accepted by auditors without follow-up. Lot-to-patient traceability answered in seconds by the application — no longer by the lab archive.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SECTION: EXPERIMENTAR ============= -->
+  <section class="body" id="experimentar">
+    <div class="frame">
+      <div class="grid">
+        <h2>
+          <span class="num">§ 04</span>
+          <span class="pt">Experimentar</span>
+          <span class="en">Try it</span>
+        </h2>
+
+        <div>
+          <div class="pt">
+            <p>
+              A demo é um deploy separado, com banco populado por seed fictício. Sem dados de paciente, equipe ou identidade do laboratório real. Reseed nightly.
+            </p>
+            <p>
+              Os dois usuários cobrem os papéis principais — admin com permissões plenas, analista com escopo de registro de medição e leitura.
+            </p>
+          </div>
+
+          <div class="en">
+            <p>
+              The demo is a separate deployment, populated with fictitious seed data. No real patient, staff, or lab-identity information. Reseeded nightly.
+            </p>
+            <p>
+              The two users cover the main roles — admin with full permissions, analyst scoped to measurement entry and reading.
+            </p>
+          </div>
+
+          <div class="access">
+            <div class="row">
+              <b>url</b><span><a href="https://bioqc.vercel.app">bioqc.vercel.app</a></span>
+            </div>
+            <div class="row creds">
+              <b>admin</b><span>admin@demo.bioqc.dev · Demo123!</span>
+            </div>
+            <div class="row">
+              <b><span class="pt">analista</span><span class="en">analyst</span></b><span>analyst@demo.bioqc.dev · Demo123!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SECTION: NOTA DO AUTOR ============= -->
+  <section class="body signoff" id="autor">
+    <div class="frame">
+      <div class="grid">
+        <h2>
+          <span class="num">§ 05</span>
+          <span class="pt">Sobre quem fez</span>
+          <span class="en">About the author</span>
+        </h2>
+
+        <div>
+          <div class="pt">
+            <p>
+              Sou Otávio Machado, 20, graduando em engenharia de software na PUCRS. Construo sistemas onde corretude pesa mais que velocidade — porque vão ser auditados, regulados ou pagam contas reais.
+            </p>
+            <p>
+              Disponível para freelance: backend Java/Spring ou Node, frontend React/TypeScript, migrações full-stack, domínios regulados (saúde clínica, finanças, compliance, ISO).
+            </p>
+            <p>
+              <a class="body-link" href="mailto:otavio100206@gmail.com">otavio100206@gmail.com</a> — respondo em até 24h.
+            </p>
+            <p class="name">Otávio Machado</p>
+            <p class="where">Porto Alegre · MMXXVI</p>
+          </div>
+
+          <div class="en">
+            <p>
+              I'm Otávio Machado, 20, software engineering student at PUCRS in Porto Alegre. I build systems where correctness weighs more than velocity — because they get audited, regulated, or pay real bills.
+            </p>
+            <p>
+              Available for freelance: backend Java/Spring or Node, frontend React/TypeScript, full-stack migrations, regulated domains (clinical, finance, compliance, ISO).
+            </p>
+            <p>
+              <a class="body-link" href="mailto:otavio100206@gmail.com">otavio100206@gmail.com</a> — I respond within 24h.
+            </p>
+            <p class="name">Otávio Machado</p>
+            <p class="where">Porto Alegre · MMXXVI</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= COLOPHON ============= -->
+  <footer class="colophon">
+    <div class="frame">
       <div>
-        <div class="text-4xl md:text-5xl font-bold gradient-text">282</div>
-        <div class="text-sm text-slate-400 mt-2 uppercase tracking-wider">Java files</div>
-      </div>
-      <div>
-        <div class="text-4xl md:text-5xl font-bold gradient-text">116</div>
-        <div class="text-sm text-slate-400 mt-2 uppercase tracking-wider">React/TS files</div>
-      </div>
-      <div>
-        <div class="text-4xl md:text-5xl font-bold gradient-text">406</div>
-        <div class="text-sm text-slate-400 mt-2 uppercase tracking-wider">Tests passing</div>
-      </div>
-      <div>
-        <div class="text-4xl md:text-5xl font-bold gradient-text">15</div>
-        <div class="text-sm text-slate-400 mt-2 uppercase tracking-wider">DB migrations</div>
-      </div>
-    </div>
-  </section>
+        <p class="pt">Composto em Fraunces &amp; Inter, com JetBrains Mono.</p>
+        <p class="en">Set in Fraunces &amp; Inter, with JetBrains Mono.</p>
 
-  <!-- Features -->
-  <section id="features" class="py-24">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4">Built for Regulated Labs</h2>
-        <p class="text-slate-400 text-lg max-w-2xl mx-auto">Every feature was driven by real ISO 15189 audit requirements, not invented in a spec doc.</p>
+        <p class="pt">Feito em Porto Alegre, Brasil.</p>
+        <p class="en">Made in Porto Alegre, Brasil.</p>
+
+        <p>
+          <a href="https://github.com/otavio0machado/bioqc">github.com/otavio0machado/bioqc</a>
+          &nbsp;·&nbsp; MIT
+        </p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
-          <div class="w-12 h-12 rounded-lg bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Westgard Engine</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Stateless evaluator for <code class="text-cyan-300 text-xs">1-2s</code>, <code class="text-cyan-300 text-xs">1-3s</code>, <code class="text-cyan-300 text-xs">2-2s</code>, <code class="text-cyan-300 text-xs">R-4s</code>, <code class="text-cyan-300 text-xs">4-1s</code>, <code class="text-cyan-300 text-xs">10x</code>. Levey-Jennings charts rendered server-side via JFreeChart.</p>
-        </div>
-
-        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
-          <div class="w-12 h-12 rounded-lg bg-emerald-400/10 border border-emerald-400/30 flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Signed PDF Reports</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Hash-chained signature log — each PDF references the previous signature. QR code on the printout points to <code class="text-cyan-300 text-xs">/verify/{hash}</code> for tamper detection.</p>
-        </div>
-
-        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
-          <div class="w-12 h-12 rounded-lg bg-indigo-400/10 border border-indigo-400/30 flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Reagent Traceability</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Lot lifecycle state machine (waiting → open → in-use → end-of-use → archived). Per-unit tracking. Lot ↔ patient result chain answers any audit question in seconds.</p>
-        </div>
-
-        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
-          <div class="w-12 h-12 rounded-lg bg-rose-400/10 border border-rose-400/30 flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">RBAC + Audit</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Role-based permissions per resource and action. Every mutation persisted with actor, timestamp, before/after diff. JWT + refresh rotation on HttpOnly cookies.</p>
-        </div>
-
-        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
-          <div class="w-12 h-12 rounded-lg bg-amber-400/10 border border-amber-400/30 flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">AI Commentary (Gemini)</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Optional plain-Portuguese summary of monthly QC trends, appended to the regulatory report alongside deterministic statistics. Treated as advisory, never as source of truth.</p>
-        </div>
-
-        <div class="card-hover p-6 rounded-xl bg-slate-900/50 border border-slate-800">
-          <div class="w-12 h-12 rounded-lg bg-violet-400/10 border border-violet-400/30 flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Production Observability</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Prometheus metrics, structured JSON logging via logstash-logback, correlation IDs propagated end-to-end. Flyway migrations with dry-run rehearsal scripts.</p>
-        </div>
-
+      <div class="right">
+        <p class="edition">edição 01 · 2026</p>
+        <p class="pt">Versão sanitizada, publicada com autorização do cliente.<br/>Nenhum dado clínico real consta neste repositório.</p>
+        <p class="en">Sanitized version, published with client authorization.<br/>No real clinical data is present in this repository.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- Stack -->
-  <section id="stack" class="py-24 bg-slate-900/30 border-y border-slate-800">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4">Pragmatic Stack</h2>
-        <p class="text-slate-400 text-lg max-w-2xl mx-auto">Boring, mature, well-understood. Optimized for correctness and operability, not novelty.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-xl bg-slate-950 border border-slate-800">
-          <h3 class="text-sm uppercase tracking-wider text-slate-500 mb-4">Backend</h3>
-          <ul class="space-y-2 text-slate-200">
-            <li>· Java 21</li>
-            <li>· Spring Boot 3.3</li>
-            <li>· Spring Security + JWT (jjwt)</li>
-            <li>· Spring Data JPA / Hibernate</li>
-            <li>· Flyway · OpenPDF · JFreeChart</li>
-            <li>· ZXing · Caffeine · Micrometer</li>
-          </ul>
-        </div>
-
-        <div class="p-6 rounded-xl bg-slate-950 border border-slate-800">
-          <h3 class="text-sm uppercase tracking-wider text-slate-500 mb-4">Frontend</h3>
-          <ul class="space-y-2 text-slate-200">
-            <li>· React 18 + Vite</li>
-            <li>· TypeScript 5.9</li>
-            <li>· TanStack Query</li>
-            <li>· React Hook Form + Zod</li>
-            <li>· Tailwind CSS 4</li>
-            <li>· Recharts · Axios</li>
-          </ul>
-        </div>
-
-        <div class="p-6 rounded-xl bg-slate-950 border border-slate-800">
-          <h3 class="text-sm uppercase tracking-wider text-slate-500 mb-4">Platform</h3>
-          <ul class="space-y-2 text-slate-200">
-            <li>· PostgreSQL on Supabase</li>
-            <li>· Spring Boot in Docker</li>
-            <li>· Railway (API)</li>
-            <li>· Vercel (Web)</li>
-            <li>· JUnit 5 · MockMvc · Vitest</li>
-            <li>· logstash-logback · Prometheus</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Case Study -->
-  <section id="case-study" class="py-24">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <span class="text-cyan-400 text-sm font-medium uppercase tracking-wider">Case Study</span>
-        <h2 class="text-4xl md:text-5xl font-bold mt-2 mb-4">From Python desktop app to web platform</h2>
-        <p class="text-slate-400 text-lg">Migrating a clinical lab's QC operation without disrupting daily work.</p>
-      </div>
-
-      <div class="space-y-6">
-        <div class="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
-          <h3 class="text-lg font-semibold text-rose-300 mb-2">⚠ The Situation</h3>
-          <p class="text-slate-300 leading-relaxed">A Brazilian clinical lab was running daily QC on a homegrown Python desktop app. Single-machine bottleneck (one analyst at a time). Reports were Word docs anyone could edit retroactively. Reagent traceability was an Excel spreadsheet. ISO 15189 surveillance was approaching.</p>
-        </div>
-
-        <div class="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
-          <h3 class="text-lg font-semibold text-amber-300 mb-2">⚙ The Action</h3>
-          <p class="text-slate-300 leading-relaxed">Sole engineer on the rebuild. Spring Boot + React. Westgard rules as pure functions. Hash-chained signatures for tamper-evident reports. Reagent state machine. Paridade-first migration: ran old + new in parallel for 1-2 weeks per module before cutover.</p>
-        </div>
-
-        <div class="p-6 rounded-xl bg-slate-900/50 border border-slate-800">
-          <h3 class="text-lg font-semibold text-emerald-300 mb-2">✓ The Result</h3>
-          <p class="text-slate-300 leading-relaxed">Cutover with zero analyst downtime. 15 production migrations shipped. 406 tests passing. Monthly regulatory reports auditors accept without follow-up. Multiple analysts working in parallel. Lot ↔ patient result traceability in seconds.</p>
-        </div>
-      </div>
-
-      <div class="text-center mt-12">
-        <a href="https://github.com/otavio0machado/bioqc/blob/main/CASE_STUDY.md" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium">
-          Read the full case study →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-24 bg-gradient-to-b from-slate-900/30 to-slate-950 border-t border-slate-800">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6">Hire Me</h2>
-      <p class="text-slate-300 text-lg leading-relaxed mb-10">
-        I'm <strong class="text-white">Otavio Machado</strong>, a full-stack engineer based in Brazil specializing in regulated, data-heavy domains — clinical labs, healthcare, finance, compliance. Available for backend (Java/Spring, Node), frontend (React/TypeScript), and full-stack migrations.
-      </p>
-
-      <div class="grid md:grid-cols-3 gap-4 mb-10">
-        <a href="mailto:otavio100206@gmail.com" class="p-6 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-cyan-400 transition group">
-          <div class="text-3xl mb-2">📧</div>
-          <div class="text-sm text-slate-400 group-hover:text-cyan-400 transition">Email</div>
-          <div class="text-slate-200 font-medium mt-1 break-all">otavio100206@gmail.com</div>
-        </a>
-        <a href="https://github.com/otavio0machado" class="p-6 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-cyan-400 transition group">
-          <div class="text-3xl mb-2">🐙</div>
-          <div class="text-sm text-slate-400 group-hover:text-cyan-400 transition">GitHub</div>
-          <div class="text-slate-200 font-medium mt-1">@otavio0machado</div>
-        </a>
-        <a href="https://www.linkedin.com/in/machado-otavio/" class="p-6 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-cyan-400 transition group">
-          <div class="text-3xl mb-2">💼</div>
-          <div class="text-sm text-slate-400 group-hover:text-cyan-400 transition">LinkedIn</div>
-          <div class="text-slate-200 font-medium mt-1">@machado-otavio</div>
-        </a>
-      </div>
-
-      <a href="mailto:otavio100206@gmail.com?subject=Project%20inquiry%20from%20BioQC%20portfolio" class="inline-block px-8 py-3.5 rounded-lg bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-semibold transition shadow-lg shadow-cyan-500/20">
-        Start a conversation →
-      </a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-8 border-t border-slate-800 text-center text-slate-500 text-sm">
-    <div class="max-w-6xl mx-auto px-6">
-      <p>BioQC is a sanitized portfolio version of a system I built for a clinical lab client, published with explicit authorization. All data is fictitious.</p>
-      <p class="mt-2">© 2026 Otavio Machado · MIT License · <a href="https://github.com/otavio0machado/bioqc" class="text-slate-400 hover:text-cyan-400">Source on GitHub</a></p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const saved = localStorage.getItem('bioqc-lang');
+      if (saved === 'pt' || saved === 'en') html.dataset.lang = saved;
+
+      function syncLabel() {
+        const isPt = html.dataset.lang === 'pt';
+        document.getElementById('lang-pt').classList.toggle('active', isPt);
+        document.getElementById('lang-en').classList.toggle('active', !isPt);
+      }
+
+      document.getElementById('lang-toggle').addEventListener('click', () => {
+        html.dataset.lang = html.dataset.lang === 'pt' ? 'en' : 'pt';
+        html.lang = html.dataset.lang === 'pt' ? 'pt-BR' : 'en';
+        localStorage.setItem('bioqc-lang', html.dataset.lang);
+        syncLabel();
+      });
+
+      syncLabel();
+    })();
+  </script>
 
 </body>
 </html>
